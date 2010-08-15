@@ -1,2 +1,3 @@
 # French strings go here for Rails i18n
 fr:
+  label_workload_calendar: Calendrier de charge de travail
