@@ -1,3 +1,4 @@
-<% workload_versions.each do |version| -%>
+<% @workload = Workload.new %>
+<% @workload.versions.each do |version| -%>
   <%= link_to_version version %><br />
 <% end -%>
