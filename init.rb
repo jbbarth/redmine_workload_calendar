@@ -1,5 +1,8 @@
 require 'redmine'
 
+#additions
+require 'redmine_workload/macros'
+
 Redmine::Plugin.register :redmine_workload_calendar do
   name 'Redmine Workload Calendar plugin'
   author 'Jean-Baptiste BARTH'
