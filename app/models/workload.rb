@@ -19,10 +19,10 @@ class Workload
   end
   
   def date_from
-    Date.today - 3000
+    Date.today - 30
   end
   
   def date_to
-    Date.today + 150
+    Date.today + 120
   end
 end
