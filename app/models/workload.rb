@@ -1,4 +1,8 @@
 class Workload
+  def initialize(args = {})
+    @project = args.delete(:project)
+  end
+  
   def versions
     @versions ||= Version.all(:conditions => [
       "project_id IN (?) AND effective_date BETWEEN ? AND ?", 
