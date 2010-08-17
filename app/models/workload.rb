@@ -6,7 +6,7 @@ class Workload
   def versions
     @versions ||= Version.all(:conditions => [
       "project_id IN (?) AND effective_date BETWEEN ? AND ?", 
-       projects, date_from, date_to
+       projects, Workload.date_from, Workload.date_to
     ])
   end
   
@@ -18,11 +18,17 @@ class Workload
     end
   end
   
-  def date_from
+  def self.date_from
     Date.today - 30
   end
   
-  def date_to
+  def self.date_to
     Date.today + 120
+  end
+  
+  def self.each_monday(&block)
+    (date_from..date_to).each do |d|
+      yield d if d.wday == 1
+    end
   end
 end
