@@ -1,4 +1,28 @@
-<% @workload = Workload.new(:project => @project) %>
-<% @workload.versions.each do |version| -%>
-  <%= link_to_version version %><br />
+<%
+@workload = Workload.new(:project => @project)
+
+%>
+<table class="workload">
+  <thead>
+    <tr>
+      <th>  </th>
+    <% Workload.each_monday do |day| -%>
+      <th><%= day.cweek %></th>
+    <% end -%>
+    </tr>
+  </thead>
+  <tbody>
+  <% @workload.versions.each do |version| -%>
+    <tr>
+      <td><%= "#{version.project} #{version}" %></td>
+    <% Workload.each_monday do |day| -%>
+      <td class="<%= "selected" if version.effective_date.between?(day,day+6) %>"> </td>
+    <% end -%>
+    </tr>
+  <% end -%>
+  </tbody>
+</table>
+
+<% content_for :header_tags do -%>
+  <%= stylesheet_link_tag "workload", :plugin => :redmine_workload_calendar %>
 <% end -%>
