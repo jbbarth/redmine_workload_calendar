@@ -14,7 +14,7 @@
   <tbody>
   <% @workload.versions.each do |version| -%>
     <tr>
-      <td><%= "#{version.project} #{version}" %></td>
+      <td><%= truncate("#{version.project} #{version}", :length => 30) %></td>
     <% Workload.each_monday do |day| -%>
       <td class="<%= workload_css_classes_for(version,day) %>"> </td>
     <% end -%>
