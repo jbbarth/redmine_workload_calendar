@@ -16,7 +16,7 @@
     <tr>
       <td><%= "#{version.project} #{version}" %></td>
     <% Workload.each_monday do |day| -%>
-      <td class="<%= "selected" if version.effective_date.between?(day,day+6) %>"> </td>
+      <td class="<%= workload_css_classes_for(version,day) %>"> </td>
     <% end -%>
     </tr>
   <% end -%>
