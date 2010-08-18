@@ -1,5 +1,5 @@
 <%
-@workload = Workload.new(:project => @project)
+@workload = Workload.new(:project => project || @project)
 
 %>
 <table class="workload">
