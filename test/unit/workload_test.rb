@@ -18,4 +18,11 @@ class WorkloadTest < ActiveSupport::TestCase
     w = Workload.new(:project => Project.find(1))
     assert_equal 5, w.projects.length
   end
+  
+  test "Workload#load_by_week" do
+    w = Workload.new
+    expected = {35=>1}
+    assert_instance_of Hash, w.load_by_week
+    assert_equal expected, w.load_by_week
+  end
 end
