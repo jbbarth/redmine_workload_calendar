@@ -24,7 +24,9 @@ class Workload
   
   def load_by_week
     @load ||= self.versions.inject(Hash.new(0)) do |memo,version|
-      memo[version.effective_date.cweek] += 1
+      version.load_weeks.each do |week|
+        memo[week] += 1
+      end
       memo
     end
   end
