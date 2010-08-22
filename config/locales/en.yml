@@ -1,3 +1,4 @@
 # English strings go here for Rails i18n
 en:
   label_workload_calendar: Workload calendar
+  field_version_load: Workload
