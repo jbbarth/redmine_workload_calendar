@@ -3,6 +3,11 @@ require 'redmine'
 #additions
 require 'redmine_workload/macros'
 
+#patches
+config.to_prepare do
+  require_dependency 'redmine_workload/patches/version_patch'
+end
+
 Redmine::Plugin.register :redmine_workload_calendar do
   name 'Redmine Workload Calendar plugin'
   author 'Jean-Baptiste BARTH'
