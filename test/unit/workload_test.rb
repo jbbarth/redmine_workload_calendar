@@ -22,9 +22,8 @@ class WorkloadTest < ActiveSupport::TestCase
   end
   
   test "Workload#load_by_week" do
-    w = Workload.new
-    expected = {35=>1}
-    assert_instance_of Hash, w.load_by_week
+    w = Workload.new(:date_from => Date.new(2006,7,1), :date_to => Date.new(2006,7,31))
+    expected = {26=>2}
     assert_equal expected, w.load_by_week
   end
 end
