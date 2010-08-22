@@ -4,12 +4,14 @@ class WorkloadTest < ActiveSupport::TestCase
   test "Workload creation" do
     w = Workload.new
     assert_not_nil w
+    assert_equal Date.today - 30, w.date_from
+    assert_equal Date.today + 120, w.date_to
   end
   
   test "Workload#versions" do
-    w = Workload.new
-    assert !w.versions.empty?
-    assert w.versions.first.is_a?(Version)
+    w = Workload.new(:date_from => Date.new(2006,7,1), :date_to => Date.new(2006,7,31))
+    assert_equal 2, w.versions.length
+    assert_instance_of Version, w.versions.first
   end
   
   test "Workload#projects" do

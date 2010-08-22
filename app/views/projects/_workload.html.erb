@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>  </th>
-    <% Workload.each_monday do |day| -%>
+    <% @workload.each_monday do |day| -%>
       <th class="<%= workload_week_style(@workload.load_by_week,day) %>"><%= day.cweek %></th>
     <% end -%>
     </tr>
@@ -15,7 +15,7 @@
   <% @workload.versions.each do |version| -%>
     <tr>
       <td><%= link_to_workload_version(version) %></td>
-    <% Workload.each_monday do |day| -%>
+    <% @workload.each_monday do |day| -%>
       <td class="<%= workload_css_classes_for(version,day) %>"> </td>
     <% end -%>
     </tr>
