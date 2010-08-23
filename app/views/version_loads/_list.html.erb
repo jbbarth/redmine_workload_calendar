@@ -13,9 +13,9 @@
   <tbody>
   <% @version_loads.each do |version_load| -%>
     <tr class="version_load <%= cycle("odd", "even") %>">
-        <td><%=h version_load.name %></td>
-        <td><%=h version_load.weeks_before %></td>
-        <td><%=h version_load.weeks_after %></td>
+        <td class="center"><%=h version_load.name %></td>
+        <td class="center"><%=h version_load.weeks_before %></td>
+        <td class="center"><%=h version_load.weeks_after %></td>
         <td class="buttons">
       <%= link_to l(:button_update), {:controller => 'version_loads', :action => 'edit', :id => version_load},
           :class => 'icon icon-edit' %>
