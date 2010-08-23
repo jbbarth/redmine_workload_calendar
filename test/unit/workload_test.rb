@@ -26,4 +26,9 @@ class WorkloadTest < ActiveSupport::TestCase
     expected = {26=>2}
     assert_equal expected, w.load_by_week
   end
+  
+  test "Workload#weeks" do
+    w = Workload.new(:date_from => Date.new(2006,7,1), :date_to => Date.new(2006,7,31))
+    assert_equal [26,27,28,29,30,31], w.weeks
+  end
 end

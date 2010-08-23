@@ -46,4 +46,8 @@ class Workload
     n = Setting["plugin_redmine_workload_calendar"]["display_weeks_after"] rescue ""
     n.scan(/\d+/).to_s.to_i
   end
+  
+  def weeks
+    (date_from..date_to).map(&:cweek).uniq
+  end
 end
