@@ -13,7 +13,7 @@
   <tbody>
   <% @version_loads.each do |version_load| -%>
     <tr class="version_load <%= cycle("odd", "even") %>">
-        <td><%=link_to h(version_load.name), {:controller => 'version_loads', :action => 'show', :id => @version_load} %></td>
+        <td><%=h version_load.name %></td>
         <td><%=h version_load.weeks_before %></td>
         <td><%=h version_load.weeks_after %></td>
         <td class="buttons">
