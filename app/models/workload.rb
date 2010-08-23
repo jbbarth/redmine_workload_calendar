@@ -3,8 +3,8 @@ class Workload
   
   def initialize(args = {})
     @project = args.delete(:project)
-    @date_from = args.delete(:date_from) || Date.today - 30 
-    @date_to = args.delete(:date_to) || Date.today + 120
+    @date_from = args.delete(:date_from) || Date.today - (7 * display_weeks_before)
+    @date_to = args.delete(:date_to) || Date.today + (7 * display_weeks_after)
   end
   
   def versions
@@ -35,5 +35,15 @@ class Workload
     (date_from..date_to).each do |d|
       yield d if d.wday == 1
     end
+  end
+  
+  def display_weeks_before
+    n = Setting["plugin_redmine_workload_calendar"]["display_weeks_before"] rescue ""
+    n.scan(/\d+/).to_s.to_i
+  end
+  
+  def display_weeks_after
+    n = Setting["plugin_redmine_workload_calendar"]["display_weeks_after"] rescue ""
+    n.scan(/\d+/).to_s.to_i
   end
 end

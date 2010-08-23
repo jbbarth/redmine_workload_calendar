@@ -2,3 +2,5 @@
 en:
   label_workload_calendar: Workload calendar
   field_version_load: Workload
+  field_display_weeks_before: Number of weeks displayed before
+  field_display_weeks_after: Number of weeks displayed after

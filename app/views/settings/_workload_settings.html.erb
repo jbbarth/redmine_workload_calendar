@@ -1,0 +1,13 @@
+<fieldset>
+<legend>Workload calendar Plugin</legend>
+<p>
+  <label><%= l(:field_display_weeks_before) %></label>
+  <%= text_field_tag 'settings[display_weeks_before]', @settings['display_weeks_before'], :size => 4 %>
+</p>
+<p>
+  <label><%= l(:field_display_weeks_after) %></label>
+  <%= text_field_tag 'settings[display_weeks_after]', @settings['display_weeks_after'], :size => 4 %>
+</p>
+</fieldset>
+
+

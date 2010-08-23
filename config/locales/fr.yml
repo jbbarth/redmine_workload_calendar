@@ -2,3 +2,5 @@
 fr:
   label_workload_calendar: Calendrier de charge de travail
   field_version_load: Charge
+  field_display_weeks_before: Nombre de semaines affichées avant
+  field_display_weeks_after: Nombre de semaines affichées après
