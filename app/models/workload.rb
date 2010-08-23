@@ -11,7 +11,7 @@ class Workload
     @versions ||= Version.all(:conditions => [
       "project_id IN (?) AND effective_date BETWEEN ? AND ?", 
        projects, date_from, date_to
-    ]).sort_by{|v| v.load_start}
+    ]).sort_by{|v| [v.load_start, v.project.name, v.name] }
   end
   
   def projects
