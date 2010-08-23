@@ -1,0 +1,30 @@
+<% @version_loads = VersionLoad.all %>
+
+<% if @version_loads.any? -%>
+<table class="list">		
+  <thead>
+    <tr>
+            <th><%= l(:field_name)%></th>
+            <th><%= l(:field_weeks_before)%></th>
+            <th><%= l(:field_weeks_after)%></th>
+            <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @version_loads.each do |version_load| -%>
+    <tr class="version_load <%= cycle("odd", "even") %>">
+        <td><%=link_to h(version_load.name), {:controller => 'version_loads', :action => 'show', :id => @version_load} %></td>
+        <td><%=h version_load.weeks_before %></td>
+        <td><%=h version_load.weeks_after %></td>
+        <td class="buttons">
+      <%= link_to l(:button_update), {:controller => 'version_loads', :action => 'edit', :id => version_load},
+          :class => 'icon icon-edit' %>
+    </td>
+  </tr>
+  <% end -%>
+  </tbody>
+</table>
+
+<% else -%>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end -%>

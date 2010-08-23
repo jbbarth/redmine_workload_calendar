@@ -1,6 +1,9 @@
 # French strings go here for Rails i18n
 fr:
   label_workload_calendar: Calendrier de charge de travail
+  label_version_load: Charge par version
   field_version_load: Charge
   field_display_weeks_before: Nombre de semaines affichées avant
   field_display_weeks_after: Nombre de semaines affichées après
+  field_weeks_before: Semaines avant
+  field_weeks_after: Semaines après
