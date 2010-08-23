@@ -5,7 +5,7 @@
 <table class="workload">
   <thead>
     <tr>
-      <th><%= "#{l(:label_project)} - #{l(:label_version)}" %></th>
+      <th><%= l(:label_project) %> <%= l(:label_version) %></th>
     <% @workload.each_monday do |day| -%>
       <th class="<%= workload_week_style(@workload.load_by_week,day) %>"><%= day.cweek %></th>
     <% end -%>

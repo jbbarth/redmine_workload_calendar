@@ -2,7 +2,7 @@
 table.workload { border-collapse:collapse; margin:auto; width:100%; }
 table.workload th { padding:3px; border:1px solid #ddd; }
 table.workload td { border:1px solid #ddd; }
-table.workload td.version { width:220px; padding:3px; }
+table.workload td.version { width:230px; padding:5px 8px; }
 table.workload td.today { background:#ffdddd; }
 table.workload td.selected { background:#bbbbcc; }
 
