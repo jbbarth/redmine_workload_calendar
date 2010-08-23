@@ -1,4 +1,4 @@
-<h2><%= link_to l(:label_version_load), version_loads_path %> &#187; <%=h @version_load.name %></h2>
+<h2><%=l(:label_version_load)%> &#187; <%=h @version_load.name %></h2>
 
 <% labelled_tabular_form_for :version_load, @version_load, :url => {:controller=>'version_loads', :action=>'update'}, :html => { :class => nil, :method => :put } do |f| -%>
 	<%= render :partial => 'form', :locals => { :f => f } %>
