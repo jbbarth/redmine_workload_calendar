@@ -16,7 +16,8 @@
     <tr>
       <td class="version"><%= link_to_workload_version(version) %></td>
     <% @workload.each_monday do |day| -%>
-      <td class="<%= workload_css_classes_for(version,day) %>"> </td>
+      <% next if version.load_weeks.include?(day.cweek) && version.load_weeks.first != day.cweek %>
+      <%= content_tag(:td, "", workload_html_options_for(version,day,@workload.weeks)) %>
     <% end -%>
     </tr>
   <% end -%>

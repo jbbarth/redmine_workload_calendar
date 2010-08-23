@@ -1,9 +1,16 @@
 module WorkloadHelper
-  def workload_css_classes_for(version,day)
+  def workload_html_options_for(version,day,workload_weeks)
+    options = {}
+    #css classes
     c = []
     c << "selected" if version.load_weeks.include?(day.cweek)
     c << "today" if day.cweek == Date.today.cweek
-    c.join(" ")
+    options[:class] = c.join(" ")
+    #colspan
+    if c.include?("selected")
+      options[:colspan] = version.load_weeks.reject{|e|!workload_weeks.include?(e)}.length
+    end
+    options
   end
   
   def workload_week_style(load_by_week,day)
