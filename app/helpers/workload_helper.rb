@@ -14,7 +14,7 @@ module WorkloadHelper
   end
   
   def link_to_workload_version(version)
-    link_to_if version.visible?, truncate("#{version.project} - #{version}", :length => 30),
+    link_to_if version.visible?, truncate("#{version.project} - #{version}", :length => 40),
                { :controller => 'versions', :action => 'show', :id => version }
   end
 end
