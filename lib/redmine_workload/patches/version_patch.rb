@@ -11,7 +11,11 @@ class Version
     @load_end = self.effective_date + self.version_load.weeks_after * 7
   end
   
+  def load_period
+    load_start..load_end
+  end
+  
   def load_weeks
-    load_start.cweek..load_end.cweek
+    load_period.map(&:cweek).uniq
   end
 end
