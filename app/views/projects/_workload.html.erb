@@ -21,6 +21,7 @@
   <tbody>
   <% @workload.versions.each do |version| -%>
     <% load_weeks_real = version.load_weeks_in_workload(@workload) %>
+    <% next if load_weeks_real.empty? %>
     <tr>
       <td class="version"><%= link_to_workload_version(version) %></td>
     <% @workload.each_monday do |day| -%>
