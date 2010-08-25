@@ -31,4 +31,10 @@ class WorkloadTest < ActiveSupport::TestCase
     w = Workload.new(:date_from => Date.new(2006,7,1), :date_to => Date.new(2006,7,31))
     assert_equal [26,27,28,29,30,31], w.weeks
   end
+  
+  test "Ensure Workload#each_monday and Workload#weeks are coherent" do
+    w = Workload.new
+    a = []; w.each_monday{|m| a << m.cweek}
+    assert_equal w.weeks, a
+  end
 end

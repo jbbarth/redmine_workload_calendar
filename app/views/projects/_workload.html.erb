@@ -25,7 +25,6 @@
     <tr>
       <td class="version"><%= link_to_workload_version(version) %></td>
     <% @workload.each_monday do |day| -%>
-      <% debugger if version.id == 1 %>
       <% next if load_weeks_real.include?(day.cweek) && load_weeks_real.first != day.cweek %>
       <%= content_tag(:td, "", workload_html_options_for(version,day,@workload)) %>
     <% end -%>
