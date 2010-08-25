@@ -24,4 +24,15 @@ module WorkloadHelper
     link_to_if version.visible?, truncate("#{version.project} - #{version}", :length => 40),
                { :controller => 'versions', :action => 'show', :id => version }
   end
+  
+  def workload_version_tooltip(version)
+    h = '&nbsp;'
+    h << '<span class="tip workload-version-tooltip">'
+    [[l(:field_due_date), format_date(version.effective_date)],
+     [l(:field_version_load), version.version_load.name],
+     [l(:field_description), version.description ]].each do |a|
+      h << "<p><strong>#{a[0]}</strong>: #{h a[1]}</p>"
+    end
+    h << '</span>'
+  end
 end
