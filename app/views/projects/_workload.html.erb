@@ -7,7 +7,14 @@
     <tr>
       <th><%= l(:label_project) %> <%= l(:label_version) %></th>
     <% @workload.each_monday do |day| -%>
-      <th class="<%= workload_week_style(@workload.load_by_week,day) %>"><%= day.cweek %></th>
+      <th class="<%= workload_week_style(@workload.load_by_week,day) %>">
+        <div class="tooltip">
+          <%= day.cweek %>
+          <span class="tip workload-week-tip">
+            <%= format_date(day) %> - <%= format_date(day+6) %>
+          </span>
+        </div>
+      </th>
     <% end -%>
     </tr>
   </thead>
