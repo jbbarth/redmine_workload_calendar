@@ -1,5 +1,5 @@
 module WorkloadHelper
-  def workload_html_options_for(version,day,workload_weeks)
+  def workload_html_options_for(version,day,workload)
     options = {}
     #css classes
     c = []
@@ -8,7 +8,7 @@ module WorkloadHelper
     options[:class] = c.join(" ")
     #colspan
     if c.include?("selected")
-      options[:colspan] = version.load_weeks.reject{|e|!workload_weeks.include?(e)}.length
+      options[:colspan] = version.load_weeks_in_workload(workload).length
     end
     options
   end

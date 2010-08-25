@@ -20,11 +20,13 @@
   </thead>
   <tbody>
   <% @workload.versions.each do |version| -%>
+    <% load_weeks_real = version.load_weeks_in_workload(@workload) %>
     <tr>
       <td class="version"><%= link_to_workload_version(version) %></td>
     <% @workload.each_monday do |day| -%>
-      <% next if version.load_weeks.include?(day.cweek) && version.load_weeks.first != day.cweek %>
-      <%= content_tag(:td, "", workload_html_options_for(version,day,@workload.weeks)) %>
+      <% debugger if version.id == 1 %>
+      <% next if load_weeks_real.include?(day.cweek) && load_weeks_real.first != day.cweek %>
+      <%= content_tag(:td, "", workload_html_options_for(version,day,@workload)) %>
     <% end -%>
     </tr>
   <% end -%>

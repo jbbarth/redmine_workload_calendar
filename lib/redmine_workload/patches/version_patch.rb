@@ -18,4 +18,8 @@ class Version
   def load_weeks
     @load_weeks ||= load_period.map(&:cweek).uniq
   end
+  
+  def load_weeks_in_workload(workload)
+    load_weeks.reject{|e|!workload.weeks.include?(e)}
+  end
 end
