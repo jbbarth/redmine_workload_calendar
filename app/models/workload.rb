@@ -52,4 +52,8 @@ class Workload
   def weeks
     (date_from..date_to).map(&:cweek).uniq
   end
+  
+  def cache_key
+    @cache_key ||= "#{@date_from}-#{@date_to}-#{@project ? @project.id : 0}-#{Version.last(:order => 'updated_on').try(:updated_on)}"
+  end
 end

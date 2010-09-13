@@ -2,6 +2,7 @@
 @workload = Workload.new(:project => project || @project)
 
 %>
+<% cache(@workload.cache_key) do -%>
 <table class="workload">
   <thead>
     <tr>
@@ -36,6 +37,7 @@
   <% end -%>
   </tbody>
 </table>
+<% end -%>
 
 <% content_for :header_tags do -%>
   <%= stylesheet_link_tag "workload", :plugin => :redmine_workload_calendar %>
