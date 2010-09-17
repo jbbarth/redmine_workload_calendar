@@ -53,7 +53,11 @@ class Workload
     (date_from..date_to).map(&:cweek).uniq
   end
   
-  def cache_key
-    @cache_key ||= "#{@date_from}-#{@date_to}-#{@project ? @project.id : 0}-#{Version.last(:order => 'updated_on').try(:updated_on)}"
+  def cache_key(user=User.current)
+    return @cache_key if @cache_key
+    cache_key ||= "#{@date_from}-#{@date_to}-#{@project ? @project.id : 0}"
+    cache_key << versions.map{|v| "#{v.visible?(user) ? "t" : "f"}#{v.id}"}.join("-")
+    cache_key << "#{Version.last(:order => 'updated_on').try(:updated_on)}"
+    @cache_key = Digest::MD5.hexdigest(cache_key)
   end
 end
