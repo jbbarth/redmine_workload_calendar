@@ -7,10 +7,10 @@ table.workload td.today { background:#ffdddd; }
 table.workload td.selected { background:#bbbbcc; }
 
 /* th workload colours */
-table.workload th.load-0, table.workload th.load-1 { background-color:#7d7; }
-table.workload th.load-2 { background-color:#fd4; }
-table.workload th.load-3 { background-color:#f33; }
-table.workload th.load-4 { color: #fff; background-color:#000; }
+table.workload th.load-0 { background-color:#7d7; }
+table.workload th.load-1 { background-color:#fd4; }
+table.workload th.load-2 { background-color:#f33; }
+table.workload th.load-3 { color: #fff; background-color:#000; }
 
 /* tooltips */
 div.tooltip:hover span.workload-week-tip { width:180px; white-space:nowrap; text-align:center; top:-30px; left:-80px; } 

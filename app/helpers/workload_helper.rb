@@ -16,7 +16,7 @@ module WorkloadHelper
   def workload_week_style(load_by_week,day)
     l = load_by_week[day.cweek]
     #TODO: remove this hard-coded limit
-    l = 4 if l >= 4
+    l = 3 if l > 3
     "load-#{l}"
   end
   
