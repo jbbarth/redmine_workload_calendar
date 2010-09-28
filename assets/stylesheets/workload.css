@@ -7,6 +7,7 @@ table.workload td.today { background:#ffdddd; }
 table.workload td.selected { background:#bbbbcc; }
 
 /* th workload colours */
+table.workload th div.tooltip:hover { color:inherit; }
 table.workload th.load-0 { background-color:#7d7; }
 table.workload th.load-1 { background-color:#fd4; }
 table.workload th.load-2 { background-color:#f33; }
