@@ -11,7 +11,10 @@ class Workload
     @versions ||= Version.all(:conditions => [
       "project_id IN (?) AND effective_date BETWEEN ? AND ?", 
        projects, date_from - 7, date_to + 7
-    ]).sort_by{|v| [v.load_start, v.project.name, v.name] }
+    ]).sort_by do |v|
+      real_load = v.load_weeks_in_workload(self)
+      [real_load.first, real_load.length, v.project.name, v.name]
+    end
   end
   
   def projects
