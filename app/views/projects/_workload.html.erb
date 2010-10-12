@@ -3,6 +3,7 @@
 
 %>
 <% cache(@workload.cache_key) do -%>
+<div class="autoscroll">
 <table class="workload">
   <thead>
     <tr>
@@ -38,6 +39,7 @@
   <% end -%>
   </tbody>
 </table>
+</div>
 <% end -%>
 
 <% content_for :header_tags do -%>
