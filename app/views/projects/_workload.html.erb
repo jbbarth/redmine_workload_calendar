@@ -27,11 +27,12 @@
       <td class="version"><%= link_to_workload_version(version) %></td>
     <% @workload.each_monday do |day| -%>
       <% next if load_weeks_real.include?(day.cweek) && load_weeks_real.first != day.cweek %>
-      <%= content_tag(:td,
-                      content_tag(:div,
-                                  (load_weeks_real.include?(day.cweek) ? workload_version_tooltip(version) : " "), 
-                                  :class=>"tooltip"),
-                      workload_html_options_for(version,day,@workload)) %>
+      <% if load_weeks_real.include?(day.cweek) -%>
+        <%= content_tag(:td, content_tag(:div, workload_version_tooltip(version), :class=>"tooltip"),
+                        workload_html_options_for(version,day,@workload)) %>
+      <% else -%>
+        <%= content_tag(:td, " ", workload_html_options_for(version,day,@workload)) %>
+      <% end -%>
     <% end -%>
     </tr>
   <% end -%>
