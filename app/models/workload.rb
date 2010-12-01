@@ -15,7 +15,7 @@ class Workload
       v.load_weeks_in_workload(self).blank?
     end.sort_by do |v|
       real_load = v.load_weeks_in_workload(self)
-      [real_load.first, real_load.length, v.project.name, v.name]
+      [v.load_start.year, real_load.first, real_load.length, v.project.name, v.name]
     end
   end
   
