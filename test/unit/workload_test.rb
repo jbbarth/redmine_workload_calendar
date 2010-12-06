@@ -9,7 +9,7 @@ class WorkloadTest < ActiveSupport::TestCase
   end
   
   test "Workload#versions" do
-    w = Workload.new(:date_from => Date.new(2006,7,1), :date_to => Date.new(2006,7,31))
+    w = Workload.new(:week_from => Week.new(2006,26), :week_to => Week.new(2006,31))
     assert_equal 2, w.versions.length
     assert_instance_of Version, w.versions.first
   end
@@ -22,13 +22,13 @@ class WorkloadTest < ActiveSupport::TestCase
   end
   
   test "Workload#load_by_week" do
-    w = Workload.new(:date_from => Date.new(2006,7,1), :date_to => Date.new(2006,7,31))
+    w = Workload.new(:week_from => Week.new(2006,26), :week_to => Week.new(2006,31))
     expected = {26=>2}
     assert_equal expected, w.load_by_week
   end
   
   test "Workload#weeks" do
-    w = Workload.new(:date_from => Date.new(2006,7,1), :date_to => Date.new(2006,7,31))
+    w = Workload.new(:week_from => Week.new(2006,26), :week_to => Week.new(2006,31))
     assert_equal [26,27,28,29,30,31], w.weeks
   end
   

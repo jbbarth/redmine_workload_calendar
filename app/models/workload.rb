@@ -1,10 +1,12 @@
 class Workload
-  attr_accessor :project, :date_from, :date_to
+  attr_accessor :project, :week_from, :date_from, :week_to, :date_to
   
   def initialize(args = {})
     @project = args.delete(:project)
-    @date_from = args.delete(:date_from) || Date.today - (7 * display_weeks_before)
-    @date_to = args.delete(:date_to) || Date.today + (7 * display_weeks_after)
+    @week_from = args.delete(:week_from) || Week.new(Date.today) - display_weeks_before
+    @date_from = @week_from.first_day
+    @week_to = args.delete(:week_to) || Week.new(Date.today) + display_weeks_after
+    @date_to = @week_to.last_day
   end
   
   def versions
