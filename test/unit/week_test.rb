@@ -9,4 +9,13 @@ class WeekTest < ActiveSupport::TestCase
     assert_equal 2011, week.year
     assert_equal 1, week.cweek
   end
+
+  should "be comparable" do
+    week1 = Week.new(2011,1)
+    week2 = Week.new(2011,2)
+    week3 = Week.new(2012,1)
+    sorted = [week1,week2,week3]
+    assert sorted, [week1,week3,week2].sort
+    assert sorted, [week3,week2,week1,week2].uniq.sort
+  end
 end
