@@ -37,9 +37,11 @@ class Workload
   end
   
   def each_monday(&block)
-    (date_from..date_to).map do |d|
+    (date_from..date_to).select do |d|
+      d.cwday == 1 #mondays only
+    end.map do |d|
       [d.year, d.cweek]
-    end.uniq.each do |d|
+    end.each do |d|
       yield Date.commercial(d[0],d[1],1)
     end
   end
