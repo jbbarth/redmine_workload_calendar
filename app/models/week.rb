@@ -8,14 +8,14 @@ class Week < Struct.new(:year,:cweek)
   end
 
   def first_day
-    Date.commercial(self.year,self.cweek,1)
+    Date.commercial(year,cweek,1)
   end
 
   def last_day
-    Date.commercial(self.year,self.cweek,7)
+    Date.commercial(year,cweek,7)
   end
 
   def <=>(other)
-    [self.year,self.cweek] <=> [other.year,other.cweek]
+    [year,cweek] <=> [other.year,other.cweek]
   end
 end
