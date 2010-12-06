@@ -18,4 +18,12 @@ class Week < Struct.new(:year,:cweek)
   def <=>(other)
     [year,cweek] <=> [other.year,other.cweek]
   end
+
+  def +(int)
+    Week.new(first_day + 7*int)
+  end
+
+  def -(int)
+    Week.new(first_day - 7*int)
+   end
 end
