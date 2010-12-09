@@ -35,4 +35,9 @@ class WeekTest < ActiveSupport::TestCase
     assert_equal Week.new(2011,1), week.succ
     assert_equal Week.new(2011,2), week.succ.succ
   end
+
+  should "have an integer representation" do
+    assert_equal 201001, Week.new(2010,1).to_i
+    assert_equal 201031, Week.new(2010,31).to_i
+  end
 end

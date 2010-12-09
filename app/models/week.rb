@@ -30,4 +30,8 @@ class Week < Struct.new(:year,:cweek)
   def succ
     Week.new(first_day + 7)
   end
+
+  def to_i
+    "#{year}#{"%0.2d" % cweek}".to_i
+  end
 end
