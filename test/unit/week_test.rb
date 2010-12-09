@@ -29,4 +29,10 @@ class WeekTest < ActiveSupport::TestCase
     assert_equal week1, week2 - 1
     assert_equal week1, week3 - 52
   end
+
+  should "be iterable" do
+    week = Week.new(2010,52)
+    assert_equal Week.new(2011,1), week.succ
+    assert_equal Week.new(2011,2), week.succ.succ
+  end
 end

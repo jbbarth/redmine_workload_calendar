@@ -25,5 +25,9 @@ class Week < Struct.new(:year,:cweek)
 
   def -(int)
     Week.new(first_day - 7*int)
-   end
+  end
+
+  def succ
+    Week.new(first_day + 7)
+  end
 end
