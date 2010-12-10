@@ -7,6 +7,10 @@ class Week < Struct.new(:year,:cweek)
     end
   end
 
+  def self.today
+    Week.new(Date.today)
+  end
+
   def first_day
     Date.commercial(year,cweek,1)
   end

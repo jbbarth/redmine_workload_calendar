@@ -40,4 +40,8 @@ class WeekTest < ActiveSupport::TestCase
     assert_equal 201001, Week.new(2010,1).to_i
     assert_equal 201031, Week.new(2010,31).to_i
   end
+
+  should "return this week for #today" do
+    assert_equal Week.new(Date.today), Week.today
+  end
 end
