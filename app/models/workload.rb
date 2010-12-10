@@ -38,11 +38,9 @@ class Workload
     end
   end
   
-  def each_monday(&block)
-    weeks.map do |d|
-      [d.year, d.cweek]
-    end.each do |d|
-      yield Date.commercial(d[0],d[1],1)
+  def each_week(&block)
+    weeks.each do |week|
+      yield week
     end
   end
   

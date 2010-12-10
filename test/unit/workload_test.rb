@@ -32,9 +32,9 @@ class WorkloadTest < ActiveSupport::TestCase
     assert_equal [26,27,28,29,30,31], w.weeks.map(&:cweek)
   end
   
-  test "Ensure Workload#each_monday and Workload#weeks are coherent" do
+  test "Ensure Workload#each_week and Workload#weeks are coherent" do
     w = Workload.new
-    a = []; w.each_monday{|m| a << m.cweek}
-    assert_equal w.weeks.map(&:cweek), a
+    a = []; w.each_week{|m| a << m}
+    assert_equal w.weeks.to_a, a
   end
 end

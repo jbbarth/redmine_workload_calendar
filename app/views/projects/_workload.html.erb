@@ -8,12 +8,12 @@
   <thead>
     <tr>
       <th><%= l(:label_project) %> <%= l(:label_version) %></th>
-    <% @workload.each_monday do |day| -%>
-      <th class="<%= workload_week_style(@workload.load_by_week,day) %>">
+    <% @workload.each_week do |week| -%>
+      <th class="<%= workload_week_style(@workload.load_by_week,week) %>">
         <div class="tooltip">
-          <%= day.cweek %>
+          <%= "#{week.to_i}".last(2) %>
           <span class="tip workload-week-tip">
-            <%= format_date(day) %> - <%= format_date(day+6) %>
+            <%= format_date(week.first_day) %> - <%= format_date(week.last_day) %>
           </span>
         </div>
       </th>
@@ -26,13 +26,13 @@
     <% next if load_weeks_real.empty? %>
     <tr>
       <td class="version"><%= link_to_workload_version(version) %></td>
-    <% @workload.each_monday do |day| -%>
-      <% next if load_weeks_real.include?(Week.new(day)) && load_weeks_real.first != Week.new(day) %>
-      <% if load_weeks_real.include?(day.cweek) -%>
+    <% @workload.each_week do |week| -%>
+      <% next if load_weeks_real.include?(week) && load_weeks_real.first != week %>
+      <% if load_weeks_real.include?(week) -%>
         <%= content_tag(:td, content_tag(:div, workload_version_tooltip(version), :class=>"tooltip"),
-                        workload_html_options_for(version,day,@workload)) %>
+                        workload_html_options_for(version,week,@workload)) %>
       <% else -%>
-        <%= content_tag(:td, " ", workload_html_options_for(version,day,@workload)) %>
+        <%= content_tag(:td, " ", workload_html_options_for(version,week,@workload)) %>
       <% end -%>
     <% end -%>
     </tr>

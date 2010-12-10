@@ -1,10 +1,10 @@
 module WorkloadHelper
-  def workload_html_options_for(version,day,workload)
+  def workload_html_options_for(version,week,workload)
     options = {}
     #css classes
     c = []
-    c << "selected" if version.load_weeks.include?(Week.new(day))
-    c << "today" if day.cweek == Date.today.cweek
+    c << "selected" if version.load_weeks.include?(week)
+    c << "today" if week == Week.new(Date.today)
     options[:class] = c.join(" ")
     #colspan
     if c.include?("selected")
@@ -13,8 +13,8 @@ module WorkloadHelper
     options
   end
   
-  def workload_week_style(load_by_week,day)
-    l = load_by_week[Week.new(day).to_i]
+  def workload_week_style(load_by_week,week)
+    l = load_by_week[week.to_i]
     #TODO: remove this hard-coded limit
     l = 3 if l > 3
     "load-#{l}"
