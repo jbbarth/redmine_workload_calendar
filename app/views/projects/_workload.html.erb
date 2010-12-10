@@ -27,7 +27,7 @@
     <tr>
       <td class="version"><%= link_to_workload_version(version) %></td>
     <% @workload.each_monday do |day| -%>
-      <% next if load_weeks_real.include?(day.cweek) && load_weeks_real.first != day.cweek %>
+      <% next if load_weeks_real.include?(Week.new(day)) && load_weeks_real.first != Week.new(day) %>
       <% if load_weeks_real.include?(day.cweek) -%>
         <%= content_tag(:td, content_tag(:div, workload_version_tooltip(version), :class=>"tooltip"),
                         workload_html_options_for(version,day,@workload)) %>

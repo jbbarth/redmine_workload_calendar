@@ -32,16 +32,14 @@ class Workload
   def load_by_week
     @load ||= self.versions.inject(Hash.new(0)) do |memo,version|
       version.load_weeks.each do |week|
-        memo[week] += 1
+        memo[week.to_i] += 1
       end
       memo
     end
   end
   
   def each_monday(&block)
-    (date_from..date_to).select do |d|
-      d.cwday == 1 #mondays only
-    end.map do |d|
+    weeks.map do |d|
       [d.year, d.cweek]
     end.each do |d|
       yield Date.commercial(d[0],d[1],1)
@@ -59,7 +57,7 @@ class Workload
   end
   
   def weeks
-    (date_from..date_to).map(&:cweek).uniq
+    week_from..week_to
   end
   
   def cache_key(user=User.current)

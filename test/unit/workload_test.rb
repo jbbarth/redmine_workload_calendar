@@ -23,18 +23,18 @@ class WorkloadTest < ActiveSupport::TestCase
   
   test "Workload#load_by_week" do
     w = Workload.new(:week_from => Week.new(2006,26), :week_to => Week.new(2006,31))
-    expected = {26=>2}
+    expected = {200626=>2}
     assert_equal expected, w.load_by_week
   end
   
   test "Workload#weeks" do
     w = Workload.new(:week_from => Week.new(2006,26), :week_to => Week.new(2006,31))
-    assert_equal [26,27,28,29,30,31], w.weeks
+    assert_equal [26,27,28,29,30,31], w.weeks.map(&:cweek)
   end
   
   test "Ensure Workload#each_monday and Workload#weeks are coherent" do
     w = Workload.new
     a = []; w.each_monday{|m| a << m.cweek}
-    assert_equal w.weeks, a
+    assert_equal w.weeks.map(&:cweek), a
   end
 end

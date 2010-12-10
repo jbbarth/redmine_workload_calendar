@@ -3,7 +3,7 @@ module WorkloadHelper
     options = {}
     #css classes
     c = []
-    c << "selected" if version.load_weeks.include?(day.cweek)
+    c << "selected" if version.load_weeks.include?(Week.new(day))
     c << "today" if day.cweek == Date.today.cweek
     options[:class] = c.join(" ")
     #colspan
@@ -14,7 +14,7 @@ module WorkloadHelper
   end
   
   def workload_week_style(load_by_week,day)
-    l = load_by_week[day.cweek]
+    l = load_by_week[Week.new(day).to_i]
     #TODO: remove this hard-coded limit
     l = 3 if l > 3
     "load-#{l}"
