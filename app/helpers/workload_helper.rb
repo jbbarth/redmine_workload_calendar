@@ -4,7 +4,7 @@ module WorkloadHelper
     #css classes
     c = []
     c << "selected" if version.load_weeks.include?(week)
-    c << "today" if week == Week.new(Date.today)
+    c << "today" if week == Week.today
     options[:class] = c.join(" ")
     #colspan
     if c.include?("selected")

@@ -1,18 +1,16 @@
 class Workload
-  attr_accessor :project, :week_from, :date_from, :week_to, :date_to
+  attr_accessor :project, :week_from, :week_to
   
   def initialize(args = {})
     @project = args.delete(:project)
-    @week_from = args.delete(:week_from) || Week.new(Date.today) - display_weeks_before
-    @date_from = @week_from.first_day
-    @week_to = args.delete(:week_to) || Week.new(Date.today) + display_weeks_after
-    @date_to = @week_to.last_day
+    @week_from = args.delete(:week_from) || Week.today - display_weeks_before
+    @week_to = args.delete(:week_to) || Week.today + display_weeks_after
   end
   
   def versions
     @versions ||= Version.all(:conditions => [
       "project_id IN (?) AND effective_date BETWEEN ? AND ?", 
-       projects, date_from - 7, date_to + 7
+       projects, week_from.first_day, week_to.last_day
     ]).reject do |v|
       v.load_weeks_in_workload(self).blank?
     end.sort_by do |v|
@@ -60,7 +58,7 @@ class Workload
   
   def cache_key(user=User.current)
     return @cache_key if @cache_key
-    cache_key ||= "#{@date_from}-#{@date_to}-#{@project ? @project.id : 0}"
+    cache_key ||= "#{@week_from}-#{@week_to}-#{@project ? @project.id : 0}"
     cache_key << versions.map{|v| "#{v.visible?(user) ? "t" : "f"}#{v.id}"}.join("-")
     cache_key << "#{Version.last(:order => 'updated_on').try(:updated_on)}"
     @cache_key = Digest::MD5.hexdigest(cache_key)

@@ -4,8 +4,8 @@ class WorkloadTest < ActiveSupport::TestCase
   test "Workload creation" do
     w = Workload.new
     assert_not_nil w
-    assert_equal (Date.today - 4*7).cweek, w.date_from.cweek
-    assert_equal (Date.today + 16*7).cweek, w.date_to.cweek
+    assert_equal Week.today - 4, w.week_from
+    assert_equal Week.today + 16, w.week_to
   end
   
   test "Workload#versions" do
