@@ -5,7 +5,7 @@ module WorkloadHelper
     c = []
     c << "selected" if version.load_weeks.include?(week)
     c << "today" if week == Week.today
-    options[:class] = c.join(" ")
+    options[:class] = c.join(" ") unless c.blank?
     #colspan
     if c.include?("selected")
       options[:colspan] = version.load_weeks_in_workload(workload).length
