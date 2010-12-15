@@ -14,5 +14,5 @@ table.workload th.load-2 { background-color:#f33; }
 table.workload th.load-3 { color: #fff; background-color:#000; }
 
 /* tooltips */
-div.tooltip:hover span.workload-week-tip { width:180px; white-space:nowrap; text-align:center; top:-30px; left:-80px; } 
+div.tooltip:hover span.workload-week-tip { width:180px; white-space:nowrap; text-align:center; top:30px; left:-80px; } 
 div.tooltip:hover span.workload-version-tip { width:200px; white-space:nowrap; top:50px; left:-50px; } 
