@@ -1,6 +1,7 @@
 /* styles for workload calendar plugin */
-table.workload { border-collapse:collapse; margin:10px 5px 15px; border:2px solid #aaa; z-index:20; }
-table.workload th { width:30px; padding:1px 3px; border:1px solid #ddd; height:1.5em; vertical-align:middle; }
+table.workload { border-collapse:collapse; margin:10px 5px 15px; border:1px solid #e0e0e0; z-index:20; }
+table.workload th { width:30px; padding:1px 3px; border:1px solid #e0e0e0; height:1.5em; vertical-align:middle; background-color:#f0f0f0; }
+table.workload th:first-child { font-weight:normal; }
 table.workload td { border:1px solid #e0e0e0; height:1.2em; vertical-align:middle; }
 table.workload td.version { max-width:230px; padding:4px 8px; white-space:nowrap; }
 table.workload td.today { background:#ffdddd; }
@@ -10,11 +11,13 @@ table.workload div.working { background-color:#99c; color:#fff; padding:0.2em 0.
 table.workload span.version-name { font-weight:bold; font-size:10px; text-decoration:none !important; text-shadow:1px 1px 1px #666; }
 
 /* th workload colours */
+table.workload th .tooltip { border-width:0 0 6px 0; border-style:solid; }
+table.workload th:first-child .tooltip { border-width:0; }
 table.workload th div.tooltip:hover { color:inherit; }
-table.workload th.load-0 { background-color:#7d7; }
-table.workload th.load-1 { background-color:#fd4; }
-table.workload th.load-2 { background-color:#f33; }
-table.workload th.load-3 { color: #fff; background-color:#000; }
+table.workload th.load-0 .tooltip { border-color:#7d7; }
+table.workload th.load-1 .tooltip { border-color:#fd4; }
+table.workload th.load-2 .tooltip { border-color:#f33; }
+table.workload th.load-3 .tooltip { border-color:#000; }
 
 /* tooltips */
 div.tooltip:hover span.workload-week-tip { width:180px; white-space:nowrap; text-align:center; top:30px; left:-80px; } 
