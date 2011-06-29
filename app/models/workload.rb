@@ -10,7 +10,7 @@ class Workload
   def versions
     @versions ||= Version.all(:conditions => [
       "project_id IN (?) AND effective_date BETWEEN ? AND ?", 
-       projects, week_from.first_day, week_to.last_day
+       projects, (week_from - 1).first_day, week_to.last_day
     ]).reject do |v|
       v.load_weeks_in_workload(self).blank?
     end.sort_by do |v|
