@@ -1,6 +1,6 @@
 /* styles for workload calendar plugin */
 table.workload { border-collapse:collapse; margin:10px 0 15px; border:1px solid #e0e0e0; z-index:20; }
-table.workload th { width:30px; padding:1px 3px; border:1px solid #e0e0e0; height:1.5em; vertical-align:middle; background-color:#f0f0f0; }
+table.workload th { width:30px; padding:1px 0; border:1px solid #e0e0e0; height:1.5em; vertical-align:middle; background-color:#f0f0f0; }
 table.workload th:first-child { font-weight:normal; }
 table.workload td { border:1px solid #e0e0e0; height:1.2em; vertical-align:middle; padding:2px 0; }
 table.workload td.version { max-width:230px; padding:4px 8px; white-space:nowrap; }
