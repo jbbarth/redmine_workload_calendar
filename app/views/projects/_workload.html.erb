@@ -7,7 +7,7 @@
 <table class="workload">
   <thead>
     <tr>
-      <th><%= l(:label_project) %> - <%= l(:label_version) %></th>
+      <th><%= l(:label_project) %></th>
     <% @workload.each_week do |week| -%>
       <th class="<%= workload_week_style(@workload.load_by_week,week) %>">
         <div class="tooltip">
