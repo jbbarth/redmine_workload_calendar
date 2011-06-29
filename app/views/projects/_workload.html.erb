@@ -29,8 +29,7 @@
     <% @workload.each_week do |week| -%>
       <% next if load_weeks_real.include?(week) && load_weeks_real.first != week %>
       <% if load_weeks_real.include?(week) -%>
-        <%= content_tag(:td, content_tag(:div, workload_version_tooltip(version), :class=>"tooltip"),
-                        workload_html_options_for(version,week,@workload)) %>
+        <%= render_workload(version, week, @workload) %>
       <% else -%>
         <%= content_tag(:td, " ", workload_html_options_for(version,week,@workload)) %>
       <% end -%>

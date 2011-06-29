@@ -26,7 +26,7 @@ module WorkloadHelper
   end
   
   def workload_version_tooltip(version)
-    h = '&nbsp;'
+    h = ''
     h << '<span class="tip workload-version-tooltip">'
     [[l(:field_due_date), format_date(version.effective_date)],
      [l(:field_version_load), version.version_load.name],
@@ -34,5 +34,13 @@ module WorkloadHelper
       h << "<p><strong>#{a[0]}</strong>: #{h a[1]}</p>"
     end
     h << '</span>'
+  end
+
+  def render_workload(version, week, workload)
+    content_tag :td, workload_html_options_for(version, week, workload) do
+      content_tag :div, :class => "working tooltip" do
+        workload_version_tooltip(version) + content_tag(:span, version.name, :class => "version-name")
+      end
+    end
   end
 end
