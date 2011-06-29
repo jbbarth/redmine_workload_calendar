@@ -22,4 +22,12 @@ class Version
       !workload.weeks.include?(e)
     end
   end
+
+  def load_start_visible?(workload)
+    workload.weeks.include?(load_start)
+  end
+
+  def load_end_visible?(workload)
+    workload.weeks.include?(load_end)
+  end
 end

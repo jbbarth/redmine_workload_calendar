@@ -1,13 +1,22 @@
 /* styles for workload calendar plugin */
-table.workload { border-collapse:collapse; margin:10px 5px 15px; border:1px solid #e0e0e0; z-index:20; }
+table.workload { border-collapse:collapse; margin:10px 0 15px; border:1px solid #e0e0e0; z-index:20; }
 table.workload th { width:30px; padding:1px 3px; border:1px solid #e0e0e0; height:1.5em; vertical-align:middle; background-color:#f0f0f0; }
 table.workload th:first-child { font-weight:normal; }
-table.workload td { border:1px solid #e0e0e0; height:1.2em; vertical-align:middle; }
+table.workload td { border:1px solid #e0e0e0; height:1.2em; vertical-align:middle; padding:2px 0; }
 table.workload td.version { max-width:230px; padding:4px 8px; white-space:nowrap; }
 table.workload td.today { background:#ffdddd; }
 table.workload td.today.selected { background:inherit; }
-table.workload div.working { background-color:#99c; color:#fff; padding:0.2em 0.8em; margin:0; text-align:center; 
-                            -moz-border-radius:14px; -webkit-border-radius:14px; border-radius:14px; }
+table.workload div.working { background-color:#99c; color:#fff; padding:0.2em 0.8em; margin:0; text-align:center; }
+table.workload div.working.begun {
+  margin-left:2px;
+  -moz-border-radius-topleft:14px; -webkit-border-top-left-radius:14px; border-top-left-radius:14px;
+  -moz-border-radius-bottomleft:14px; -webkit-border-bottom-left-radius:14px; border-bottom-left-radius:14px;
+}
+table.workload div.working.ended {
+  margin-right:2px;
+  -moz-border-radius-topright:14px; -webkit-border-top-right-radius:14px; border-top-right-radius:14px;
+  -moz-border-radius-bottomright:14px; -webkit-border-bottom-right-radius:14px; border-bottom-right-radius:14px;
+}
 table.workload span.version-name { font-weight:bold; font-size:10px; text-decoration:none !important; text-shadow:1px 1px 1px #666; }
 
 /* th workload colours */

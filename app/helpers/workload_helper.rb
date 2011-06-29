@@ -5,11 +5,14 @@ module WorkloadHelper
     c = []
     c << "selected" if version.load_weeks.include?(week)
     c << "today" if week == Week.today
+
     options[:class] = c.join(" ") unless c.blank?
+
     #colspan
     if c.include?("selected")
       options[:colspan] = version.load_weeks_in_workload(workload).length
     end
+
     options
   end
   
@@ -37,8 +40,11 @@ module WorkloadHelper
   end
 
   def render_workload(version, week, workload)
+    css = "tooltip working"
+    css << " begun" if version.load_start_visible?(workload)
+    css << " ended" if version.load_end_visible?(workload)
     content_tag :td, workload_html_options_for(version, week, workload) do
-      content_tag :div, :class => "working tooltip" do
+      content_tag :div, :class => css do
         workload_version_tooltip(version) + content_tag(:span, version.name, :class => "version-name")
       end
     end
