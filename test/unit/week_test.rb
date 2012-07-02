@@ -15,8 +15,8 @@ class WeekTest < ActiveSupport::TestCase
     week2 = Week.new(2011,2)
     week3 = Week.new(2012,1)
     sorted = [week1,week2,week3]
-    assert sorted, [week1,week3,week2].sort
-    assert sorted, [week3,week2,week1,week2].uniq.sort
+    assert_equal sorted, [week1,week3,week2].sort
+    assert_equal sorted, [week3,week2,week1,week2].uniq.sort
   end
 
   should "allow + and - operations" do
