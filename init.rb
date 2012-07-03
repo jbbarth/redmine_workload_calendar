@@ -16,7 +16,7 @@ Redmine::Plugin.register :redmine_workload_calendar do
   url 'http://github.com/jbbarth/redmine_workload_calendar'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   version '0.1'
-  requires_redmine :version_or_higher => '1.0.0'
+  requires_redmine :version_or_higher => '2.0.3'
   settings :partial => 'settings/workload_settings',
            :default => {
              'display_weeks_before' => "4",
