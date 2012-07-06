@@ -26,7 +26,7 @@ class WorkloadTest < ActiveSupport::TestCase
   
   test "Workload#projects" do
     w = Workload.new
-    assert_equal 2, w.projects.length
+    assert_equal Project.count, w.projects.length
     w = Workload.new(:project => @subproject)
     assert_equal 1, w.projects.length
   end

@@ -19,7 +19,7 @@ class VersionLoadTest < ActiveSupport::TestCase
   end
 
   test "#projects" do
-    assert_equal [@project], @workload.projects.to_a
+    assert @workload.projects.include?(@project)
   end
   
   test "#load_by_week" do
