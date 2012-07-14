@@ -36,6 +36,7 @@ module WorkloadHelper
       h << "<p><strong>#{a[0]}</strong>: #{h a[1]}</p>"
     end
     h << '</span>'
+    h.html_safe
   end
 
   def render_workload(version, week, workload)
