@@ -6,7 +6,7 @@
 <table class="workload">
   <thead>
     <tr>
-      <th><%= l(:label_project) %></th>
+      <th colspan="4"><%= l(:label_project) %></th>
     <% @workload.each_week do |week| -%>
       <th class="<%= workload_week_style(@workload.load_by_week,week) %>">
         <div class="tooltip">
@@ -24,7 +24,7 @@
     <% load_weeks_real = version.load_weeks_in_workload(@workload) %>
     <% next if load_weeks_real.empty? %>
     <tr>
-      <td class="version"><%= link_to_workload_version(version) %></td>
+      <td class="version" colspan="4"><%= link_to_workload_version(version) %></td>
     <% @workload.each_week do |week| -%>
       <% next if load_weeks_real.include?(week) && load_weeks_real.first != week %>
       <% if load_weeks_real.include?(week) -%>
