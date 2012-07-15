@@ -6,8 +6,7 @@ table.workload td { border:1px solid #e0e0e0; height:1.2em; vertical-align:middl
 table.workload td.version { max-width:230px; padding:4px 8px; }
 table.workload td.today { background:#ffdddd; }
 table.workload td.today.selected { background:inherit; }
-table.workload div.working { background-color:#99c; color:#fff; padding:0.2em 0.8em; margin:0; text-align:center;
-                             white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+table.workload div.working { background-color:#99c; color:#fff; padding:0.2em 0.8em; margin:0; text-align:center; }
 table.workload div.working.begun {
   margin-left:2px;
   -moz-border-radius-topleft:14px; -webkit-border-top-left-radius:14px; border-top-left-radius:14px;
@@ -18,7 +17,8 @@ table.workload div.working.ended {
   -moz-border-radius-topright:14px; -webkit-border-top-right-radius:14px; border-top-right-radius:14px;
   -moz-border-radius-bottomright:14px; -webkit-border-bottom-right-radius:14px; border-bottom-right-radius:14px;
 }
-table.workload span.version-name { font-weight:bold; font-size:10px; text-decoration:none !important; text-shadow:1px 1px 1px #666; }
+table.workload .version-name { font-weight:bold; font-size:10px; text-decoration:none !important; text-shadow:1px 1px 1px #666;
+                               white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 
 /* th workload colours */
 table.workload th .tooltip { border-width:0 0 6px 0; border-style:solid; }
@@ -30,5 +30,6 @@ table.workload th.load-2 .tooltip { border-color:#f33; }
 table.workload th.load-3 .tooltip { border-color:#000; }
 
 /* tooltips */
+div.tooltip:hover { cursor:default; }
 div.tooltip:hover span.workload-week-tip { width:180px; white-space:nowrap; text-align:center; top:30px; left:-80px; } 
 div.tooltip:hover span.workload-version-tip { width:200px; white-space:nowrap; top:50px; left:-50px; } 

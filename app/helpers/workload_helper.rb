@@ -45,7 +45,7 @@ module WorkloadHelper
     css << " ended" if version.load_end_visible?(workload)
     content_tag :td, workload_html_options_for(version, week, workload) do
       content_tag :div, :class => css do
-        workload_version_tooltip(version) + content_tag(:span, version.name, :class => "version-name")
+        workload_version_tooltip(version) + content_tag(:div, content_tag(:span, version.name), :class => "version-name")
       end
     end
   end
