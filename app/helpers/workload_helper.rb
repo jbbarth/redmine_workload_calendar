@@ -30,7 +30,8 @@ module WorkloadHelper
   def workload_version_tooltip(version)
     h = ''
     h << '<span class="tip workload-version-tooltip">'
-    [[l(:field_due_date), format_date(version.effective_date)],
+    [[l(:field_version), version.name],
+     [l(:field_due_date), format_date(version.effective_date)],
      [l(:field_version_load), version.version_load.name],
      [l(:field_description), version.description ]].each do |a|
       h << "<p><strong>#{a[0]}</strong>: #{h a[1]}</p>"
