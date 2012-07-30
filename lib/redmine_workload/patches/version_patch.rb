@@ -3,6 +3,8 @@ require_dependency 'version'
 class Version
   belongs_to :version_load
   
+  safe_attributes 'version_load_id'
+
   #TODO: cleanup this calculation
   def load_start
     @load_start ||= Week.new(self.effective_date) - (self.version_load.present? ? self.version_load.weeks_before : 0)

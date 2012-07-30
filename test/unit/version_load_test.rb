@@ -26,4 +26,11 @@ class VersionLoadTest < ActiveSupport::TestCase
     expected = {200831=>2,200833=>1}
     assert_equal expected, @workload.load_by_week
   end
+
+  test "Version#version_load_id is in Version#safe_attributes" do
+    v = Version.new(:name => 'V1')
+    v.safe_attributes = {'description' => 'final', 'version_load_id' => 2}
+    assert_equal 'final', v.description #ensures we don't break existing safe_attributes
+    assert_equal 2, v.version_load_id
+  end
 end
