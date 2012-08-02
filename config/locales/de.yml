@@ -1,0 +1,8 @@
+de:
+  label_workload_calendar: Auslastungskalender
+  label_version_load: Auslastungskalender pro Version
+  field_version_load: Auslastung
+  field_display_weeks_before: Anzahl der Wochen für die Anzeige vor dem Termin
+  field_display_weeks_after: Anzahl der Wochen für die Anzeige nach dem Termin
+  field_weeks_before: vorige Wochen
+  field_weeks_after: nachfolgende Wochen
