@@ -34,6 +34,7 @@ class WeekTest < ActiveSupport::TestCase
     week = Week.new(2010,52)
     assert_equal Week.new(2011,1), week.succ
     assert_equal Week.new(2011,2), week.succ.succ
+    assert_equal Week.new(2013,1), Week.new(2012,52).succ
   end
 
   should "have an integer representation" do

@@ -1,7 +1,8 @@
 class Week < Struct.new(:year,:cweek)
   def initialize(*args)
     if args.first.is_a?(Date)
-      super(args.first.year, args.first.cweek)
+      date = args.first
+      super(date.cwyear, date.cweek)
     else
       super(*args)
     end
