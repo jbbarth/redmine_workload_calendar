@@ -1,8 +1,9 @@
 require 'redmine'
-require 'redmine_workload/macros'
 
-# Patches to existing classes/modules
 ActionDispatch::Callbacks.to_prepare do
+  # Don't lose our macros on reload
+  require_dependency 'redmine_workload/macros'
+  # Patches to existing classes/modules
   require_dependency 'redmine_workload/patches/version_patch'
 end
 
