@@ -1,0 +1,13 @@
+# Simplified Chinese strings go here for Rails i18n
+# Author: Steven.W
+# Based on file: en.yml
+
+zh:
+  label_workload_calendar: 工作量日历
+  label_version_load: 版本工作量
+  field_version_load: 工作量
+  field_display_weeks_before: 数周前显示
+  field_display_weeks_after: 数周后显示
+  field_weeks_before: 周前
+  field_weeks_after: 周后
+
