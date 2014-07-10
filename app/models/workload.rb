@@ -1,8 +1,9 @@
 class Workload
-  attr_accessor :project, :week_from, :week_to
+  attr_accessor :project, :custom_field_filters, :week_from, :week_to
 
   def initialize(args = {})
     @project = args.delete(:project)
+    @custom_field_filters = args.delete(:custom_field_filters)
     @week_from = args.delete(:week_from) || Week.today - Workload.display_weeks_before
     @week_to = args.delete(:week_to) || Week.today + Workload.display_weeks_after
   end
@@ -20,11 +21,21 @@ class Workload
   end
 
   def projects
-    if @project
-      @project.self_and_descendants
+    if @custom_field_filters && @project
+      selected_projects = @project.self_and_descendants
+      @custom_field_filters.each do |key, values|
+        cf = ProjectCustomField.find_by_name(key)
+        selected_projects.reject!{ |project| !values.include?(project.custom_value_for(cf).value) }  if cf.present? && values.present? #TODO Performances can be improved if this is done with a single SQL query
+      end
+      selected_projects
     else
-      Project.all
+      if @project
+        @project.self_and_descendants
+      else
+        Project.all
+      end
     end
+
   end
 
   def load_by_week

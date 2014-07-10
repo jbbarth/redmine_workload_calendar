@@ -6,15 +6,17 @@ Redmine::WikiFormatting::Macros.register do
        "Example:\n" +
        "  !{{workload}} -- display versions of current project (or all if you're not under a project)\n" +
        "  !{{workload(myapplication)}} -- display versions of project 'myapplication'\n" +
-       "  !{{workload(2)}} -- display versions of project 2"
+       "  !{{workload(2)}} -- display versions of project 2'\n" +
+       "  !{{workload(myapplication, {'my_custom_field'=> %w(value1 value2 value3)} )}} -- display versions of project 'myapplication' and descendants if there custom fields have one of the given values"
 
   macro :workload do |obj, args|
     args, options = extract_macro_options(args, :parent)
     project = Project.find(args.first) rescue nil
     #TODO: remove this ugly thing
+    custom_field_filters = eval(args.second) if args.second.present? && eval(args.second).is_a?(Hash) rescue nil
     ActionView::Base.send(:include, WorkloadHelper)
     ActionView::Base.send(:include, ProjectsHelper)
     render :partial => 'projects/workload',
-           :locals => {:project => project}
+           :locals => {:project => project, :custom_field_filters => custom_field_filters}
   end
 end
