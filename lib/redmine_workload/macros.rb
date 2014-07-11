@@ -13,7 +13,7 @@ Redmine::WikiFormatting::Macros.register do
     args, options = extract_macro_options(args, :parent)
     project = Project.find(args.first) rescue nil
     #TODO: remove this ugly thing
-    custom_field_filters = eval(args.second) if args.second.present? && eval(args.second).is_a?(Hash) rescue nil
+    custom_field_filters = args.second.gsub(/[{}:]/,'').split(', ').map{|h| h1,h2 = h.split('=>'); {h1 => h2.split(' ')}}.reduce(:merge) if args.second.present?
     ActionView::Base.send(:include, WorkloadHelper)
     ActionView::Base.send(:include, ProjectsHelper)
     render :partial => 'projects/workload',
