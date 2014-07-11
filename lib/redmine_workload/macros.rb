@@ -14,9 +14,11 @@ Redmine::WikiFormatting::Macros.register do
     project = Project.find(args.first) rescue nil
     #TODO: remove this ugly thing
     custom_field_filters = args.second.gsub(/[{}:]/,'').split(', ').map{|h| h1,h2 = h.split('=>'); {h1 => h2.split(' ')}}.reduce(:merge) if args.second.present? rescue nil
+    # Only work with custom fields and custom values without spaces #TODO improve it
     custom_field_filters = nil unless custom_field_filters.is_a?(Hash)
     ActionView::Base.send(:include, WorkloadHelper)
     ActionView::Base.send(:include, ProjectsHelper)
+    ActionView::Base.send(:include, ApplicationHelper) # Tests won't pass without that
     render :partial => 'projects/workload',
            :locals => {:project => project, :custom_field_filters => custom_field_filters}
   end
