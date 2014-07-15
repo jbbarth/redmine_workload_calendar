@@ -33,7 +33,7 @@ class WorkloadTest < ActiveSupport::TestCase
   
   test "Workload#load_by_week" do
     w = Workload.new(:week_from => Week.new(2008,26), :week_to => Week.new(2008,31))
-    expected = {200831=>2}
+    expected = {200831=>2, 200832=>2, 200833=>1}
     assert_equal expected, w.load_by_week
   end
   
