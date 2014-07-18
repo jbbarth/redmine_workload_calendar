@@ -17,8 +17,10 @@ table.workload div.working.ended {
   -moz-border-radius-topright:14px; -webkit-border-top-right-radius:14px; border-top-right-radius:14px;
   -moz-border-radius-bottomright:14px; -webkit-border-bottom-right-radius:14px; border-bottom-right-radius:14px;
 }
-table.workload .version-name { font-weight:bold; font-size:10px; text-decoration:none !important; text-shadow:1px 1px 1px #666;
+table.workload .load-per-line { font-weight:bold; font-size:10px; text-decoration:none !important; text-shadow:1px 1px 1px #666;
                                white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+table.workload .load-per-line.issue-subject { min-height: 9px; }
+table.workload .load-per-line a { text-decoration:none !important; color: #FFFFFF;}
 
 /* th workload colours */
 table.workload th .tooltip { border-width:0 0 6px 0; border-style:solid; }

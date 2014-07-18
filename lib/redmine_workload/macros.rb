@@ -6,8 +6,9 @@ Redmine::WikiFormatting::Macros.register do
        "Example:\n" +
        "  !{{workload}} -- display versions of current project (or all if you're not under a project)\n" +
        "  !{{workload(myapplication)}} -- display versions of project 'myapplication'\n" +
-       "  !{{workload(2)}} -- display versions of project 2'\n" +
-       "  !{{workload(myapplication, {:my_custom_field1=>valueA valueB valueC, :my_custom_field2=>value1 value2 value3} )}} -- display versions of project 'myapplication' and descendants if there custom fields have one of the given values"
+       "  !{{workload(2)}} -- display versions of project 2\n" +
+       "  !{{workload(myapplication, {:my_custom_field1=>valueA valueB valueC, :my_custom_field2=>value1 value2 value3} )}} -- display versions of project 'myapplication' and descendants if there custom fields have one of the given values\n" +
+       "  !{{workload_by_issues(myapplication, {:trackers=>valueA valueB valueC} )}} -- display project 'myapplication' and descendants where at least one issue has one of the given trackers"
 
   macro :workload do |obj, args|
     args, options = extract_macro_options(args, :parent)
@@ -21,5 +22,18 @@ Redmine::WikiFormatting::Macros.register do
     ActionView::Base.send(:include, ApplicationHelper) # Tests won't pass without that
     render :partial => 'projects/workload',
            :locals => {:project => project, :custom_field_filters => custom_field_filters}
+  end
+
+  macro :workload_by_issues do |obj, args|
+    args, options = extract_macro_options(args, :parent)
+    project = Project.find(args.first) rescue nil
+    #TODO: remove this ugly thing
+    trackers_filters = args.second.gsub(/[{}:]/,'').split(', ').map{|h| h1,h2 = h.split('=>'); {h1 => h2.split(' ')}}.reduce(:merge) if args.second.present? rescue nil
+    trackers_filters = nil unless trackers_filters.is_a?(Hash)
+    ActionView::Base.send(:include, WorkloadHelper)
+    ActionView::Base.send(:include, ProjectsHelper)
+    ActionView::Base.send(:include, ApplicationHelper) # Tests won't pass without that
+    render :partial => 'projects/workload_by_issues',
+           :locals => {:project => project, :trackers_filters => trackers_filters}
   end
 end

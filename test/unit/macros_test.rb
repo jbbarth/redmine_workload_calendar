@@ -14,6 +14,8 @@ class RedmineWorkload::MacrosTest < ActionView::TestCase
     Version.create!(:name=>"Dumb version 1", :project_id => @project.id, :version_load_id => 2, :effective_date => Date.today)
     Version.create!(:name=>"Dumb version 2", :project_id => @project.id, :version_load_id => 3, :effective_date => Date.today+1.day)
     Version.create!(:name=>"Dumb version 3", :project_id => @project.id, :version_load_id => 3, :effective_date => Date.today+15.days)
+    @tracker = Tracker.first
+    Issue.create!(:subject=>"New issue", :project_id => @project.id, :start_date => Date.today-1.month, :due_date => Date.today-10.days, :tracker => @tracker, :author=>User.first )
   end
 
   test "workload macro" do
@@ -29,5 +31,25 @@ class RedmineWorkload::MacrosTest < ActionView::TestCase
 
     workloadFilterWithUnknownCustomValue = textilizable("{{workload(#{@project.identifier}, {:#{@custom_field.name}=>unknownTestValue})}}")
     assert !workloadFilterWithUnknownCustomValue.include?(@project.name)
+
+    # second argument has no effect if its format is not correct
+    workload_filter_with_incorrect_second_argument = textilizable("{{workload(#{@project.identifier}, wrongFormat>unknownTestValue)}}")
+    assert_equal workload_filter_with_incorrect_second_argument, textilizable("{{workload(#{@project.identifier})}}")
+  end
+
+  test "workload_by_issues macro" do
+    assert textilizable("{{workload_by_issues}}").include?('workload-week-tip')
+    assert textilizable("{{workload_by_issues(#{@project.id})}}").include?(@project.name)
+    assert textilizable("{{workload_by_issues(#{@project.identifier})}}").include?(@project.name)
+
+    workloadFilterByIssueAndTracker = textilizable("{{workload_by_issues(#{@project.identifier}, {:trackers=>#{@tracker.name}})}}")
+    assert workloadFilterByIssueAndTracker.include?(@project.name)
+
+    workloadFilterWithUnknownTrackerValue = textilizable("{{workload_by_issues(#{@project.identifier}, {:trackers=>unknownTrackerName})}}")
+    assert !workloadFilterWithUnknownTrackerValue.include?(@project.name)
+
+    # second argument has no effect if its format is not correct
+    workload_filter_with_incorrect_second_argument = textilizable("{{workload_by_issues(#{@project.identifier}, wrongFormat>unknownTestValue)}}")
+    assert_equal workload_filter_with_incorrect_second_argument, textilizable("{{workload_by_issues(#{@project.identifier})}}")
   end
 end

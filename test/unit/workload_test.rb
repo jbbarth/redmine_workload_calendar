@@ -23,6 +23,12 @@ class WorkloadTest < ActiveSupport::TestCase
     assert_equal 2, w.versions.length
     assert_instance_of Version, w.versions.first
   end
+
+  test "Workload#issues" do
+    w = Workload.new(:week_from => Week.new(2008,26), :week_to => Week.new(2008,31))
+    assert w.issues.length > 0
+    assert_instance_of Issue, w.issues.first
+  end
   
   test "Workload#projects" do
     w = Workload.new

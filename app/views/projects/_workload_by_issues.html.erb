@@ -1,15 +1,15 @@
 <%
-@workload = Workload.new(:project => project || @project, :custom_field_filters => custom_field_filters)
-
+@workload = Workload.new(:project => project || @project, :trackers_filters => trackers_filters)
 %>
-<% cache(@workload.cache_key) do -%>
+
+<% cache(@workload.cache_key_by_issues) do -%>
 <table class="workload">
   <thead>
     <tr>
       <th colspan="4"><%= l(:label_project) %></th>
     <% @workload.each_week do |week| -%>
-      <th class="<%= workload_week_style(@workload.load_by_week,week) %>">
-        <div class="tooltip">
+      <th>
+        <div class="tooltip" style="border-width: 0 0 0 0;">
           <%= "#{week.to_i}".last(2) %>
           <span class="tip workload-week-tip">
             <%= format_date(week.first_day) %> - <%= format_date(week.last_day) %>
@@ -20,17 +20,16 @@
     </tr>
   </thead>
   <tbody>
-  <% @workload.versions.each do |version| -%>
-    <% load_weeks_real = version.load_weeks_in_workload(@workload) %>
-    <% next if load_weeks_real.empty? %>
+  <% @workload.issues.each do |issue| -%>
+    <% load_weeks_real = issue.load_weeks_in_workload(@workload) %>
     <tr>
-      <td class="version" colspan="4"><%= link_to_workload_version(version, version.project.name) %></td>
+      <td class="version" colspan="4"><%= link_to_workload_issue(issue, issue.project.name) %></td>
     <% @workload.each_week do |week| -%>
       <% next if load_weeks_real.include?(week) && load_weeks_real.first != week %>
       <% if load_weeks_real.include?(week) -%>
-        <%= render_workload(version, week, @workload) %>
+        <%= render_workload(issue, week, @workload) %>
       <% else -%>
-        <%= content_tag(:td, " ", workload_html_options_for(version,week,@workload)) %>
+        <%= content_tag(:td, " ", workload_html_options_for(issue,week,@workload)) %>
       <% end -%>
     <% end -%>
     </tr>

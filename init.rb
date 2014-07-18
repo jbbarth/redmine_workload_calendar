@@ -5,6 +5,7 @@ ActionDispatch::Callbacks.to_prepare do
   require_dependency 'redmine_workload/macros'
   # Patches to existing classes/modules
   require_dependency 'redmine_workload/patches/version_patch'
+  require_dependency 'redmine_workload/patches/issue_patch'
 end
 
 Redmine::Plugin.register :redmine_workload_calendar do

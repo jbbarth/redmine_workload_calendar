@@ -1,9 +1,10 @@
 class Workload
-  attr_accessor :project, :custom_field_filters, :week_from, :week_to
+  attr_accessor :project, :custom_field_filters, :trackers_filters, :week_from, :week_to
 
   def initialize(args = {})
     @project = args.delete(:project)
     @custom_field_filters = args.delete(:custom_field_filters)
+    @trackers_filters = args.delete(:trackers_filters)
     @week_from = args.delete(:week_from) || Week.today - Workload.display_weeks_before
     @week_to = args.delete(:week_to) || Week.today + Workload.display_weeks_after
   end
@@ -17,6 +18,19 @@ class Workload
     end.sort_by do |v|
       real_load = v.load_weeks_in_workload(self)
       [v.load_start.year, real_load.first, real_load.length, v.project.name, v.name]
+    end
+  end
+
+  def issues
+    if @trackers_filters.present?
+      trackers = []
+      @trackers_filters.each do |key, tracker|
+        t = Tracker.find_by_name(tracker)
+        trackers << t if t.present?
+      end
+      @issues ||= Issue.where("project_id IN (?) AND status_id <> 5 AND tracker_id IN (?)", projects, trackers.map(&:id))
+    else
+      @issues ||= Issue.where("project_id IN (?) AND status_id <> 5", projects)
     end
   end
 
@@ -62,6 +76,14 @@ class Workload
     cache_key ||= "#{@week_from}-#{@week_to}-#{@project ? @project.id : 0}"
     cache_key << versions.map{|v| "#{v.visible?(user) ? "t" : "f"}#{v.id}"}.join("-")
     cache_key << "#{Version.order('updated_on').last.try(:updated_on)}"
+    @cache_key = Digest::MD5.hexdigest(cache_key)
+  end
+
+  def cache_key_by_issues(user=User.current)
+    return @cache_key if @cache_key
+    cache_key ||= "#{@week_from}-#{@week_to}-#{@project ? @project.id : 0}"
+    cache_key << issues.map{|i| "#{i.id}"}.join("-")
+    cache_key << "#{Issue.order('updated_on').last.try(:updated_on)}"
     @cache_key = Digest::MD5.hexdigest(cache_key)
   end
 
