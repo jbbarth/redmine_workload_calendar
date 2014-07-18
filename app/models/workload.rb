@@ -22,15 +22,16 @@ class Workload
   end
 
   def issues
+    all_issues = Issue.where("project_id IN (?) AND (status_id <> 5 OR closed_on BETWEEN ? AND ?)", projects, week_from.first_day, week_to.last_day)
     if @trackers_filters.present?
       trackers = []
       @trackers_filters.each do |key, tracker|
         t = Tracker.find_by_name(tracker)
         trackers << t if t.present?
       end
-      @issues ||= Issue.where("project_id IN (?) AND status_id <> 5 AND tracker_id IN (?)", projects, trackers.map(&:id))
+      @issues ||= all_issues.where("tracker_id IN (?)", trackers.map(&:id))
     else
-      @issues ||= Issue.where("project_id IN (?) AND status_id <> 5", projects)
+      @issues ||= all_issues
     end
   end
 

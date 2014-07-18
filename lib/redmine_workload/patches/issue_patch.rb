@@ -6,7 +6,7 @@ class Issue
   end
 
   def load_end
-    @load_end ||= ( self.due_date.present? ? Week.new(self.due_date.to_date) : Week.new(Date.today)+50 ) # TODO remove this 50 (hardcoded value)
+    @load_end ||= ( self.due_date.present? ? Week.new(self.due_date.to_date) : (self.closed_on.present? ? Week.new(self.closed_on.to_date) : Week.new(Date.today)+50) ) # TODO remove this 50 (hardcoded value)
   end
 
   def load_weeks
