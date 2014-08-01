@@ -23,7 +23,7 @@ class VersionLoadTest < ActiveSupport::TestCase
   end
   
   test "#load_by_week" do
-    expected = {200831=>2,200832=>2,200833=>2,200834=>1,200835=>1}
+    expected = {200831=>2,200833=>1}
     assert_equal expected, @workload.load_by_week
   end
 
