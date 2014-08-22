@@ -1,13 +1,13 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require "spec_helper"
 require 'redmine_workload/macros'
 
-class RedmineWorkload::MacrosTest < ActionView::TestCase
+describe "RedmineWorkload::Macros", type: :helper do
   include ApplicationHelper
   include ERB::Util
 
   fixtures :projects, :custom_fields, :custom_values
 
-  setup do
+  before do
     @project = Project.create!(:name => "Project X", :identifier => "project-x")
     @custom_field = ProjectCustomField.create!(:name => 'newCustomField', :field_format=>'list', :possible_values=>['Environment', 'testValue'])
     @custom_value = CustomValue.create!(customized_type:'Project', customized_id:@project.id, custom_field_id: @custom_field.id, value: "testValue")
@@ -18,7 +18,7 @@ class RedmineWorkload::MacrosTest < ActionView::TestCase
     Issue.create!(:subject=>"New issue", :project_id => @project.id, :start_date => Date.today-1.month, :due_date => Date.today-10.days, :tracker => @tracker, :author=>User.first )
   end
 
-  test "workload macro" do
+  it "should workload macro" do
     assert textilizable("{{workload}}").include?('load-2')
     assert textilizable("{{workload(#{@project.id})}}").include?('load-1')
 
@@ -34,10 +34,10 @@ class RedmineWorkload::MacrosTest < ActionView::TestCase
 
     # second argument has no effect if its format is not correct
     workload_filter_with_incorrect_second_argument = textilizable("{{workload(#{@project.identifier}, wrongFormat>unknownTestValue)}}")
-    assert_equal workload_filter_with_incorrect_second_argument, textilizable("{{workload(#{@project.identifier})}}")
+    textilizable("{{workload(#{@project.identifier})}}").should == workload_filter_with_incorrect_second_argument
   end
 
-  test "workload_by_issues macro" do
+  it "should workload_by_issues macro" do
     assert textilizable("{{workload_by_issues}}").include?('workload-week-tip')
     assert textilizable("{{workload_by_issues(#{@project.id})}}").include?(@project.name)
     assert textilizable("{{workload_by_issues(#{@project.identifier})}}").include?(@project.name)
@@ -50,6 +50,6 @@ class RedmineWorkload::MacrosTest < ActionView::TestCase
 
     # second argument has no effect if its format is not correct
     workload_filter_with_incorrect_second_argument = textilizable("{{workload_by_issues(#{@project.identifier}, wrongFormat>unknownTestValue)}}")
-    assert_equal workload_filter_with_incorrect_second_argument, textilizable("{{workload_by_issues(#{@project.identifier})}}")
+    textilizable("{{workload_by_issues(#{@project.identifier})}}").should == workload_filter_with_incorrect_second_argument
   end
 end
