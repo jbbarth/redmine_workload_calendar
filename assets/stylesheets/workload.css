@@ -30,6 +30,7 @@ table.workload th.load-0 .tooltip { border-color:#7d7; }
 table.workload th.load-1 .tooltip { border-color:#fd4; }
 table.workload th.load-2 .tooltip { border-color:#f33; }
 table.workload th.load-3 .tooltip { border-color:#000; }
+table.workload th.no-load .tooltip { border:none; }
 
 /* tooltips */
 div.tooltip:hover { cursor:default; }

@@ -39,7 +39,11 @@ class Workload
     if @custom_field_filters && @project
       selected_projects = @project.self_and_descendants
       @custom_field_filters.each do |key, values|
-        cf = ProjectCustomField.find_by_name(key)
+        if key.to_i > 0
+          cf = ProjectCustomField.find(key.to_i)
+        else
+          cf = ProjectCustomField.find_by_name(key)
+        end
         selected_projects.reject!{ |project| !values.include?(project.custom_value_for(cf).value) }  if cf.present? && values.present? #TODO Performances can be improved if this is done with a single SQL query
       end
       selected_projects

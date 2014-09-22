@@ -17,10 +17,14 @@ module WorkloadHelper
   end
   
   def workload_week_style(load_by_week,week)
-    l = load_by_week[week.to_i]
-    #TODO: remove this hard-coded limit
-    l = 3 if l > 3
-    "load-#{l}"
+    if Setting.plugin_redmine_workload_calendar["show_workload"]
+      l = load_by_week[week.to_i]
+      #TODO: remove this hard-coded limit
+      l = 3 if l > 3
+      "load-#{l}"
+    else
+      "no-load"
+    end
   end
   
   def link_to_workload_version(version, title=version.name)

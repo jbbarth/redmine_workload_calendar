@@ -20,6 +20,7 @@ Redmine::Plugin.register :redmine_workload_calendar do
   settings :partial => 'settings/workload_settings',
            :default => {
              'display_weeks_before' => "4",
-             'display_weeks_after'  => "16"
+             'display_weeks_after'  => "16",
+             'show_workload' => true
            }
 end

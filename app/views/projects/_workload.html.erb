@@ -1,6 +1,5 @@
 <%
-@workload = Workload.new(:project => project || @project, :custom_field_filters => custom_field_filters)
-
+  @workload = Workload.new(:project => project || @project, :custom_field_filters => custom_field_filters)
 %>
 <% cache(@workload.cache_key) do -%>
 <table class="workload">

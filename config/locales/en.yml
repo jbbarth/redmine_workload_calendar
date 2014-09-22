@@ -7,4 +7,5 @@ en:
   field_display_weeks_after: Number of weeks displayed after
   field_weeks_before: Weeks before
   field_weeks_after: Weeks after
+  show_workload_indicators: Show workload indicators
 
