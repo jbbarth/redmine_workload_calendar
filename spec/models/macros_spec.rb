@@ -34,7 +34,7 @@ describe "RedmineWorkload::Macros", type: :helper do
 
     # second argument has no effect if its format is not correct
     workload_filter_with_incorrect_second_argument = textilizable("{{workload(#{@project.identifier}, wrongFormat>unknownTestValue)}}")
-    textilizable("{{workload(#{@project.identifier})}}").should == workload_filter_with_incorrect_second_argument
+    expect(textilizable("{{workload(#{@project.identifier})}}")).to eq workload_filter_with_incorrect_second_argument
   end
 
   it "should workload_by_issues macro" do
@@ -50,6 +50,6 @@ describe "RedmineWorkload::Macros", type: :helper do
 
     # second argument has no effect if its format is not correct
     workload_filter_with_incorrect_second_argument = textilizable("{{workload_by_issues(#{@project.identifier}, wrongFormat>unknownTestValue)}}")
-    textilizable("{{workload_by_issues(#{@project.identifier})}}").should == workload_filter_with_incorrect_second_argument
+    expect(textilizable("{{workload_by_issues(#{@project.identifier})}}")).to eq workload_filter_with_incorrect_second_argument
   end
 end

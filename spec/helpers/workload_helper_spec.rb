@@ -10,8 +10,6 @@ describe WorkloadHelper do
   it "should tooltip helper doesn't raise if a version doesn't have an associated version_load" do
     v = Version.find(1)
     assert_nil v.version_load
-    assert_nothing_raised do
-      h = workload_version_tooltip(v)
-    end
+    expect{workload_version_tooltip(v)}.to_not raise_error
   end
 end

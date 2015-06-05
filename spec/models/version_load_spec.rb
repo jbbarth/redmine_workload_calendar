@@ -10,8 +10,8 @@ describe "VersionLoad" do
   end
 
   it "should #initialize" do
-    @workload.week_from.to_i.should == 200831
-    @workload.week_to.to_i.should == 200836
+    expect(@workload.week_from.to_i).to eq 200831
+    expect(@workload.week_to.to_i).to eq 200836
   end
 
   it "should #versions" do
@@ -24,13 +24,13 @@ describe "VersionLoad" do
   
   it "should #load_by_week" do
     expected = {200831=>2,200833=>1}
-    @workload.load_by_week.should == expected
+    expect(@workload.load_by_week).to eq expected
   end
 
   it "should Version#version_load_id is in Version#safe_attributes" do
     v = Version.new(:name => 'V1')
     v.safe_attributes = {'description' => 'final', 'version_load_id' => 2}
-    v.description.should == 'final' #ensures we don't break existing safe_attributes
-    v.version_load_id.should == 2
+    expect(v.description).to eq 'final' #ensures we don't break existing safe_attributes
+    expect(v.version_load_id).to eq 2
   end
 end
