@@ -12,7 +12,7 @@ class Workload
   def versions
     @versions ||= Version.where([
       "project_id IN (?) AND effective_date BETWEEN ? AND ?", 
-       projects, (week_from - 1).first_day, week_to.last_day
+       projects.map{ |p| p.id }, (week_from - 1).first_day, week_to.last_day
     ]).reject do |v|
       v.load_weeks_in_workload(self).blank?
     end.sort_by do |v|
@@ -22,7 +22,7 @@ class Workload
   end
 
   def issues
-    all_issues = Issue.where("project_id IN (?) AND (status_id <> 5 OR closed_on BETWEEN ? AND ?)", projects, week_from.first_day, week_to.last_day)
+    all_issues = Issue.where("project_id IN (?) AND (status_id <> 5 OR closed_on BETWEEN ? AND ?)", projects.map(&:id), week_from.first_day, week_to.last_day)
     if @trackers_filters.present?
       trackers = []
       @trackers_filters.each do |key, tracker|
@@ -44,7 +44,7 @@ class Workload
         else
           cf = ProjectCustomField.find_by_name(key)
         end
-        selected_projects.reject!{ |project| !values.include?(project.custom_value_for(cf).value) }  if cf.present? && values.present? #TODO Performances can be improved if this is done with a single SQL query
+        selected_projects.to_a.reject!{ |project| !values.include?(project.custom_value_for(cf).value) }  if cf.present? && values.present? #TODO Performances can be improved if this is done with a single SQL query
       end
       selected_projects
     else
