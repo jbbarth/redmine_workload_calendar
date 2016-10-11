@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require "spec_helper"
 
-class WorkloadTest < ActiveSupport::TestCase
-  setup do
+describe "Workload" do
+  before do
     Setting.plugin_redmine_workload_calendar = {"display_weeks_before"=>"4", "display_weeks_after"=>"16"}
     @project = Project.create!(:name => "Project X", :identifier => "project-x")
     @subproject = Project.create!(:name => "Project Y", :identifier => "project-y", :parent_id => @project.id)
@@ -9,42 +9,48 @@ class WorkloadTest < ActiveSupport::TestCase
     Version.create!(:name=>"Dumb version 2", :project_id => @project.id, :version_load_id => 3, :effective_date => "2008-08-02")
   end
 
-  test "Workload creation" do
+  it "should Workload creation" do
     w = Workload.new
-    assert_not_nil w
-    assert_equal 4, Workload.display_weeks_before
-    assert_equal 16, Workload.display_weeks_after
-    assert_equal Week.today - 4, w.week_from
-    assert_equal Week.today + 16, w.week_to
+    refute_nil w
+    expect(Workload.display_weeks_before).to eq 4
+    expect(Workload.display_weeks_after).to eq 16
+    expect(w.week_from).to eq Week.today - 4
+    expect(w.week_to).to eq Week.today + 16
   end
   
-  test "Workload#versions" do
+  it "should Workload#versions" do
     w = Workload.new(:week_from => Week.new(2008,26), :week_to => Week.new(2008,31))
-    assert_equal 2, w.versions.length
+    expect(w.versions.length).to eq 2
     assert_instance_of Version, w.versions.first
   end
-  
-  test "Workload#projects" do
-    w = Workload.new
-    assert_equal Project.count, w.projects.length
-    w = Workload.new(:project => @subproject)
-    assert_equal 1, w.projects.length
+
+  it "should Workload#issues" do
+    w = Workload.new(:week_from => Week.new(2008,26), :week_to => Week.new(2008,31))
+    assert w.issues.length > 0
+    assert_instance_of Issue, w.issues.first
   end
   
-  test "Workload#load_by_week" do
+  it "should Workload#projects" do
+    w = Workload.new
+    expect(w.projects.length).to eq Project.count
+    w = Workload.new(:project => @subproject)
+    expect(w.projects.length).to eq 1
+  end
+  
+  it "should Workload#load_by_week" do
     w = Workload.new(:week_from => Week.new(2008,26), :week_to => Week.new(2008,31))
     expected = {200831=>2}
-    assert_equal expected, w.load_by_week
+    expect(w.load_by_week).to eq expected
   end
   
-  test "Workload#weeks" do
+  it "should Workload#weeks" do
     w = Workload.new(:week_from => Week.new(2008,26), :week_to => Week.new(2008,31))
-    assert_equal [26,27,28,29,30,31], w.weeks.map(&:cweek)
+    expect(w.weeks.map(&:cweek)).to eq [26,27,28,29,30,31]
   end
   
-  test "Ensure Workload#each_week and Workload#weeks are coherent" do
+  it "should Ensure Workload#each_week and Workload#weeks are coherent" do
     w = Workload.new
     a = []; w.each_week{|m| a << m}
-    assert_equal w.weeks.to_a, a
+    expect(a).to eq w.weeks.to_a
   end
 end

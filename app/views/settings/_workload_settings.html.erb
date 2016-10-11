@@ -13,4 +13,11 @@
 <fieldset>
 <legend><%=l(:label_version_load)%></legend>
 
+  <p>
+    <label><%= l(:show_workload_indicators) %></label>
+    <%= check_box_tag 'settings[show_workload]', 1,
+                      @settings['show_workload'] %>
+  </p>
+
 <%= render 'version_loads/list' %>
+</fieldset>
