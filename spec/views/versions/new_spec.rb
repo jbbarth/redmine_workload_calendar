@@ -8,7 +8,6 @@ describe "versions/new.html.erb", type: :view do
     assign(:project, Project.find(1))
     assign(:version, Version.new)
     view.extend ProjectsHelper
-    # view.extend QueriesHelper
   end
 
   it "contains 'load' select tag" do
