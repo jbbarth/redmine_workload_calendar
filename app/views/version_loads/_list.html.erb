@@ -12,7 +12,7 @@
   </thead>
   <tbody>
   <% @version_loads.each do |version_load| -%>
-    <tr class="version_load <%= cycle("odd", "even") %>">
+    <tr class="version_load">
         <td class="center"><%=h version_load.name %></td>
         <td class="center"><%=h version_load.weeks_before %></td>
         <td class="center"><%=h version_load.weeks_after %></td>

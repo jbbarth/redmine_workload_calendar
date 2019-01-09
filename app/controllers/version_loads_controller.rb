@@ -3,7 +3,7 @@ class VersionLoadsController < ApplicationController
   
   layout 'admin'
   
-  before_filter :require_admin
+  before_action :require_admin
   
   def edit
     @version_load = VersionLoad.find(params[:id])

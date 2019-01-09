@@ -1,4 +1,4 @@
-class CreateVersionLoad < ActiveRecord::Migration
+class CreateVersionLoad < ActiveRecord::Migration[4.2]
   def self.up
     create_table :version_loads do |t|
       t.column :name, :string
