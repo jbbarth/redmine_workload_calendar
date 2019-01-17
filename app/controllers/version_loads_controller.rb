@@ -11,7 +11,8 @@ class VersionLoadsController < ApplicationController
   
   def update
     @version_load = VersionLoad.find(params[:id])
-    if @version_load.update_attributes(params[:version_load])
+    @version_load.safe_attributes = params[:version_load]
+    if @version_load.save
       flash[:notice] = l(:notice_successful_update)
       redirect_to(:controller => 'settings', :action => 'plugin', :id => 'redmine_workload_calendar')
     else
