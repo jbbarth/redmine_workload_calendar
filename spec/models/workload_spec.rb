@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe "Workload" do
+
+  fixtures :projects, :issues
+
   before do
     Setting.plugin_redmine_workload_calendar = {"display_weeks_before"=>"4", "display_weeks_after"=>"16"}
     @project = Project.create!(:name => "Project X", :identifier => "project-x")

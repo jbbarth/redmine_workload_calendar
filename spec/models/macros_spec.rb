@@ -5,7 +5,7 @@ describe "RedmineWorkload::Macros", type: :helper do
   include ApplicationHelper
   include ERB::Util
 
-  fixtures :projects, :custom_fields, :custom_values
+  fixtures :projects, :custom_fields, :custom_values, :trackers, :users, :issue_statuses
 
   before do
     @project = Project.create!(:name => "Project X", :identifier => "project-x")

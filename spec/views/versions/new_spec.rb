@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe "versions/new.html.erb", type: :view do
+
+  fixtures :projects, :users
+
   let(:user) { User.find(2) }
 
   before do
