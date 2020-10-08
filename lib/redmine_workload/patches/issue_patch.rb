@@ -2,11 +2,37 @@ require_dependency 'issue'
 
 class Issue
   def load_start
-    @load_start ||= ( self.start_date.present? ? Week.new(self.start_date.to_date) : Week.new(self.created_on.to_date) )
+    start_date_setting = Setting[:plugin_redmine_workload_calendar][:start_date]
+
+    if start_date_setting.to_i > 0
+      custom_field_value = self.custom_value_for(start_date_setting)
+      if custom_field_value.present?
+        start_date = custom_field_value.value.to_date
+      end
+    end
+
+    if start_date.blank?
+      start_date = self.start_date.present? ? self.start_date.to_date : self.created_on.to_date
+    end
+
+    @load_start ||= Week.new(start_date)
   end
 
   def load_end
-    @load_end ||= ( self.due_date.present? ? Week.new(self.due_date.to_date) : (self.closed_on.present? ? Week.new(self.closed_on.to_date) : Week.new(Date.today)+50) ) # TODO remove this 50 (hardcoded value)
+    end_date_setting = Setting[:plugin_redmine_workload_calendar][:end_date]
+
+    if end_date_setting.to_i > 0
+      custom_field_value = self.custom_value_for(end_date_setting)
+      if custom_field_value.present?
+        end_date = custom_field_value.value.to_date
+      end
+    end
+
+    if end_date.blank?
+      end_date = self.due_date.present? ? self.due_date.to_date : (self.closed_on.present? ? self.closed_on.to_date : (Date.today + 50.days)) # TODO remove this 50 (hardcoded value)
+    end
+
+    @load_end ||= Week.new(end_date)
   end
 
   def load_weeks
@@ -16,7 +42,7 @@ class Issue
       @load_weeks ||= nil
     end
   end
-  
+
   def load_weeks_in_workload(workload)
     load_weeks.to_a.reject do |e|
       !workload.weeks.include?(e)

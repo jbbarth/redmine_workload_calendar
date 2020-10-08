@@ -8,7 +8,7 @@ Redmine::WikiFormatting::Macros.register do
        "  !{{workload(myapplication)}} -- display versions of project 'myapplication'\n" +
        "  !{{workload(2)}} -- display versions of project 2\n" +
        "  !{{workload(myapplication, {:my_custom_field1=>valueA valueB valueC, :my_custom_field2=>value1 value2 value3} )}} -- display versions of project 'myapplication' and descendants if there custom fields have one of the given values\n" +
-       "  !{{workload_by_issues(myapplication, {:trackers=>valueA valueB valueC} )}} -- display project 'myapplication' and descendants where at least one issue has one of the given trackers"
+       "  !{{workload_by_issues(myapplication, {:trackers=>tracker_id_1 id_2 id_3} )}} -- display project 'myapplication' and descendants where at least one issue has one of the given trackers"
 
   macro :workload do |obj, args|
     args, options = extract_macro_options(args, :parent)

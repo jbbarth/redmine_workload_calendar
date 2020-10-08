@@ -1,17 +1,27 @@
 <fieldset>
-<legend>Workload calendar Plugin</legend>
-<p>
-  <label><%= l(:field_display_weeks_before) %></label>
-  <%= text_field_tag 'settings[display_weeks_before]', @settings['display_weeks_before'], :size => 4 %>
-</p>
-<p>
-  <label><%= l(:field_display_weeks_after) %></label>
-  <%= text_field_tag 'settings[display_weeks_after]', @settings['display_weeks_after'], :size => 4 %>
-</p>
+  <legend>Workload calendar Plugin</legend>
+  <p>
+    <label><%= l(:field_display_weeks_before) %></label>
+    <%= text_field_tag 'settings[display_weeks_before]', @settings['display_weeks_before'], :size => 4 %>
+  </p>
+  <p>
+    <label><%= l(:field_display_weeks_after) %></label>
+    <%= text_field_tag 'settings[display_weeks_after]', @settings['display_weeks_after'], :size => 4 %>
+  </p>
+  <p>
+    <label><%= l(:start_date) %></label>
+    <% options = [[l(:field_start_date), 0]] | CustomField.where(field_format: 'date').map { |cf| [cf.name, cf.id] } %>
+    <%= select_tag 'settings[start_date]', options_for_select(options, @settings['start_date']) %>
+  </p>
+  <p>
+    <label><%= l(:stop_date) %></label>
+    <% options = [[l(:field_due_date), 0]] | CustomField.where(field_format: 'date').map { |cf| [cf.name, cf.id] } %>
+    <%= select_tag 'settings[end_date]', options_for_select(options, @settings['end_date']) %>
+  </p>
 </fieldset>
 
 <fieldset>
-<legend><%=l(:label_version_load)%></legend>
+  <legend><%= l(:label_version_load) %></legend>
 
   <p>
     <label><%= l(:show_workload_indicators) %></label>
@@ -19,5 +29,5 @@
                       @settings['show_workload'] %>
   </p>
 
-<%= render 'version_loads/list' %>
+  <%= render 'version_loads/list' %>
 </fieldset>

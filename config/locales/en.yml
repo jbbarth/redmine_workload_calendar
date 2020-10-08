@@ -8,4 +8,6 @@ en:
   field_weeks_before: Weeks before
   field_weeks_after: Weeks after
   show_workload_indicators: Show workload indicators
+  start_date: Start date
+  stop_date: End date
 

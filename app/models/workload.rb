@@ -26,7 +26,7 @@ class Workload
     if @trackers_filters.present?
       trackers = []
       @trackers_filters.each do |key, tracker|
-        t = Tracker.find_by_name(tracker)
+        t = Tracker.find_by_id(tracker)
         trackers << t if t.present?
       end
       @issues ||= all_issues.where("tracker_id IN (?)", trackers.map(&:id))

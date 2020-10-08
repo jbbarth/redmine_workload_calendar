@@ -8,3 +8,5 @@ fr:
   field_weeks_before: Semaines avant
   field_weeks_after: Semaines après
   show_workload_indicators: Montrer les couleurs indiquant la charge
+  start_date: Date de début
+  stop_date: Date de fin

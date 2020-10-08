@@ -11,7 +11,7 @@ plugin should be considered as a communication tool for teams with many projects
     {{workload(2)}} -- display versions of project 2
     {{workload(project_identifier, {:my_custom_field1=>valueA valueB valueC, :my_custom_field2=>value1 value2 value3} )}} -- display versions of project and descendants if there custom fields have one of the given values
     
-    {{workload_by_issues(project_identifier, {:trackers=>valueA valueB valueC} )}} -- display project and descendants where at least one issue has one of the given trackers
+    {{workload_by_issues(project_identifier, {:trackers=>tracke_id_1 id_2 id_3} )}} -- display project and descendants where at least one issue has one of the given trackers
 
 
 ## Dependency
@@ -30,4 +30,4 @@ Note that this plugin now depends on:
 [1]: https://travis-matrix-badges.herokuapp.com/repos/jbbarth/redmine_workload_calendar/branches/master/1
 [2]: https://travis-matrix-badges.herokuapp.com/repos/jbbarth/redmine_workload_calendar/branches/master/2
 [3]: https://travis-matrix-badges.herokuapp.com/repos/jbbarth/redmine_workload_calendar/branches/master/3
-[5]: https://travis-ci.com/jbbarth/redmine_workload_calendar
+[5]: https://travis-ci.org/jbbarth/redmine_workload_calendar
