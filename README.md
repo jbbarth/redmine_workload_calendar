@@ -29,7 +29,7 @@ Note that this plugin now depends on:
 |master       | master            | [![master][4]][5]|
 
 [1]: https://github.com/jbbarth/redmine_workload_calendar/actions/workflows/4_2_0.yml/badge.svg
-[2]: https://github.com/jbbarth/redmine_workload_calendar/actions/workflows/4.1.2.yml/badge.svg
+[2]: https://github.com/jbbarth/redmine_workload_calendar/actions/workflows/4_1_2.yml/badge.svg
 [3]: https://github.com/jbbarth/redmine_workload_calendar/actions/workflows/4_0_8.yml/badge.svg
 [4]: https://github.com/jbbarth/redmine_workload_calendar/actions/workflows/master.yml/badge.svg
 [5]: https://github.com/jbbarth/redmine_workload_calendar/actions
